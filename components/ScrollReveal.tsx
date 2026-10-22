@@ -22,7 +22,26 @@ export function ScrollReveal() {
       });
       ScrollTrigger.refresh();
     });
-    return () => mm.revert();
+
+    // Late layout changes (scaled mockups, fonts) shift everything below them;
+    // re-measure trigger positions whenever the page height settles.
+    let timer: number;
+    let lastHeight = document.body.scrollHeight;
+    const ro = new ResizeObserver(() => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        if (document.body.scrollHeight === lastHeight) return;
+        lastHeight = document.body.scrollHeight;
+        ScrollTrigger.refresh();
+      }, 150);
+    });
+    ro.observe(document.body);
+
+    return () => {
+      ro.disconnect();
+      window.clearTimeout(timer);
+      mm.revert();
+    };
   }, []);
   return null;
 }
