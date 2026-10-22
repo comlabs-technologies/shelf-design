@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CornerDownRight } from "lucide-react";
 import { CurveDivider } from "../CurveDivider";
+import { FallingTags } from "../FallingTags";
 import { Eyebrow, SectionTitle } from "../ui/Eyebrow";
 import { SearchField } from "../ui/SearchField";
 import { SourceChip, type SourceKind } from "../ui/SourceChip";
@@ -75,7 +76,7 @@ export function SearchDemo() {
       aria-labelledby="search-title"
       className="relative z-10 bg-sand pb-24 pt-14 sm:pb-32 sm:pt-20 lg:pb-40"
     >
-      <CurveDivider shape="dome" className="bottom-[calc(100%-1px)]" />
+      <FallingTags />
 
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div className="lg:pt-10">
