@@ -95,11 +95,28 @@ export function SearchDemo() {
               you meant, not what you typed.
             </p>
           </div>
-          <ul data-reveal className="mt-8 flex flex-wrap gap-1.5" aria-label="Where references get lost">
+          <div data-reveal className="mt-9 max-w-[460px] rounded-[16px] border border-line bg-paper/70 p-5">
+            <p className="text-[20px] font-semibold leading-[1.2] tracking-[-0.03em]">
+              Find a saved thought in seconds, not an hour of digging.
+            </p>
+            <dl className="mt-4 space-y-2.5 text-[12.5px]">
+              <div className="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1.5">
+                <dt className="text-muted-strong">Digging through folders, tabs and threads</dt>
+                <dd className="text-right font-mono text-muted">~1 hr</dd>
+                <span className="col-span-2 h-1.5 rounded-full bg-line-strong/70" aria-hidden="true" />
+              </div>
+              <div className="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1.5">
+                <dt className="font-medium text-ink">Asking Recall</dt>
+                <dd className="text-right font-mono text-ink">seconds</dd>
+                <span className="col-span-2 h-1.5 w-[6%] rounded-full bg-ink" aria-hidden="true" />
+              </div>
+            </dl>
+          </div>
+          <ul data-reveal className="mt-6 flex flex-wrap gap-1.5" aria-label="Where references get lost">
             {scattered.map((s) => (
               <li
                 key={s}
-                className="rounded-full border border-line-strong/70 px-3 py-1 text-[12.5px] text-muted-strong"
+                className="rounded-full border border-line-strong/70 px-3 py-1 text-[12.5px] text-muted"
               >
                 {s}
               </li>

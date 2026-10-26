@@ -62,7 +62,7 @@ function SavePopover({ step }: { step: number }) {
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.32, ease }}
           style={{ transformOrigin: "90% 0%" }}
-          className="absolute right-3 top-[50px] z-20 w-[284px] overflow-hidden rounded-[14px] border border-line bg-surface shadow-[0_18px_40px_rgba(20,20,18,.12)]"
+          className="absolute right-3 top-[50px] z-20 w-[284px] overflow-hidden rounded-[14px] border border-line bg-surface shadow-focus"
         >
           <div className="flex items-center justify-between border-b border-line px-3.5 py-2.5">
             <span className="flex items-center gap-2 text-[12.5px] font-medium">
@@ -87,7 +87,7 @@ function SavePopover({ step }: { step: number }) {
             <span className="text-muted">Collection</span>
             <span className="flex items-center gap-1.5">
               <span className="text-[10.5px] text-muted">Suggested</span>
-              <span className="rounded-full border border-line bg-paper px-2 py-0.5 font-medium">Fundraising</span>
+              <span className="tag-lift rounded-full bg-lime px-2 py-0.5 font-medium">Fundraising</span>
             </span>
           </div>
 

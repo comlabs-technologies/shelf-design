@@ -21,7 +21,7 @@ export function SourceChip({
   return (
     <span
       className={clsx(
-        "inline-flex h-[22px] items-center gap-1 rounded-full border border-line bg-paper px-2 text-[11px] font-medium text-muted-strong",
+        "tag-lift inline-flex h-[22px] items-center gap-1 rounded-full bg-surface px-2 text-[11px] font-medium text-muted-strong",
         className,
       )}
       {...rest}

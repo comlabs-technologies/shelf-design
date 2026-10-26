@@ -12,7 +12,18 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
  * One refined horizontal field on ≥sm; stacked input + button on mobile.
  * Submission is simulated client-side — wire `onSubmit` to a real waitlist endpoint.
  */
-export function EmailForm({ className, align = "left" }: { className?: string; align?: "left" | "center" }) {
+export function EmailForm({
+  className,
+  align = "left",
+  cta = "Join the private beta",
+  note,
+}: {
+  className?: string;
+  align?: "left" | "center";
+  cta?: string;
+  /** Quiet line under the field; the validation message replaces it when needed. */
+  note?: React.ReactNode;
+}) {
   const id = useId();
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "error" | "loading" | "done">("idle");
@@ -56,12 +67,11 @@ export function EmailForm({ className, align = "left" }: { className?: string; a
             onSubmit={submit}
             noValidate
             className={clsx(
-              "group flex flex-col gap-2.5 transition-[border-color,box-shadow] duration-200 ease-recall",
-              "sm:h-14 sm:flex-row sm:items-center sm:gap-0 sm:rounded-full sm:border sm:bg-surface sm:p-1.5 sm:pl-5",
-              state === "error"
-                ? "sm:border-[#D9A08F]"
-                : "sm:border-line sm:hover:border-line-strong sm:focus-within:border-ink/40 sm:focus-within:shadow-[0_6px_20px_rgba(20,20,18,.06)]",
+              "flex flex-col gap-2.5",
+              // ≥sm: the whole pill is the inset field; the CTA sits lifted inside it.
+              "sm:field-inset sm:h-14 sm:flex-row sm:items-center sm:gap-0 sm:rounded-full sm:p-1.5 sm:pl-5",
             )}
+            data-invalid={state === "error"}
           >
             <label htmlFor={id} className="sr-only">
               Work email
@@ -80,14 +90,14 @@ export function EmailForm({ className, align = "left" }: { className?: string; a
               aria-invalid={state === "error"}
               aria-describedby={state === "error" ? `${id}-err` : undefined}
               className={clsx(
-                "h-[52px] w-full min-w-0 rounded-card sm:flex-1 border bg-surface px-4 text-[16px] tracking-[-0.01em] text-ink placeholder:text-muted",
-                "outline-none transition-[border-color] duration-200 focus-visible:outline-none",
-                "sm:h-full sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:text-[15px]",
-                state === "error" ? "border-[#D9A08F]" : "border-line focus:border-ink/40",
+                "field-inset h-[52px] w-full min-w-0 rounded-card px-4 text-[16px] tracking-[-0.01em] text-ink placeholder:text-muted",
+                "outline-none focus-visible:outline-none",
+                // ≥sm the wrapper carries the inset field styling.
+                "sm:h-full sm:flex-1 sm:rounded-none sm:!border-transparent sm:!bg-transparent sm:px-0 sm:text-[15px] sm:!shadow-none",
               )}
             />
             <Button type="submit" className="h-[52px] sm:h-full sm:px-5" disabled={state === "loading"}>
-              {state === "loading" ? "Requesting…" : "Request access"}
+              {state === "loading" ? "Joining…" : cta}
               <ArrowRight className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
             </Button>
           </motion.form>
@@ -96,9 +106,13 @@ export function EmailForm({ className, align = "left" }: { className?: string; a
       <p
         id={`${id}-err`}
         aria-live="polite"
-        className={clsx("mt-2 min-h-[18px] text-[13px] text-[#A4533C]", align === "center" && "text-center")}
+        className={clsx(
+          "mt-3 min-h-[20px] text-[13px]",
+          align === "center" && "text-center",
+          state === "error" ? "text-[#A4533C]" : "text-muted",
+        )}
       >
-        {state === "error" ? "Please enter a valid work email." : ""}
+        {state === "error" ? "Please enter a valid work email." : state === "done" ? null : note}
       </p>
     </div>
   );

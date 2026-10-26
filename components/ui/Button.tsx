@@ -1,18 +1,17 @@
-"use client";
-
 import clsx from "clsx";
-import { motion, type HTMLMotionProps } from "framer-motion";
 
 type Variant = "lime" | "ink" | "ghost";
 
+// Lime and ink are pressable (lifted, rise on hover, sink on press);
+// ghost is the quieter secondary.
 const styles: Record<Variant, string> = {
-  lime: "bg-lime text-ink border border-[#97E256] hover:border-[#86D145] hover:shadow-[0_6px_16px_rgba(120,190,60,.22)]",
-  ink: "bg-ink text-paper border border-ink hover:shadow-[0_6px_16px_rgba(20,20,18,.18)]",
-  ghost: "bg-surface text-ink border border-line hover:border-line-strong",
+  lime: "btn-press bg-lime text-ink border border-[rgba(25,25,24,.12)] hover:bg-[#B2F57A]",
+  ink: "btn-press bg-ink text-paper border border-ink",
+  ghost: "btn-soft bg-surface text-ink border border-[rgba(25,25,24,.1)] hover:border-[rgba(25,25,24,.18)]",
 };
 
 const base =
-  "inline-flex select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full font-medium tracking-[-0.01em] transition-[box-shadow,border-color,background-color] duration-200 ease-recall";
+  "inline-flex select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full font-medium tracking-[-0.01em] disabled:pointer-events-none disabled:opacity-70";
 
 const sizes = {
   sm: "h-9 px-4 text-[14px]",
@@ -24,15 +23,13 @@ interface Common {
   size?: keyof typeof sizes;
 }
 
-const lift = { whileHover: { y: -1.5 }, whileTap: { y: 0 } };
-
 export function ButtonLink({
   variant = "lime",
   size = "md",
   className,
   ...props
-}: Common & HTMLMotionProps<"a">) {
-  return <motion.a {...lift} className={clsx(base, styles[variant], sizes[size], className)} {...props} />;
+}: Common & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+  return <a className={clsx(base, styles[variant], sizes[size], className)} {...props} />;
 }
 
 export function Button({
@@ -40,8 +37,6 @@ export function Button({
   size = "md",
   className,
   ...props
-}: Common & HTMLMotionProps<"button">) {
-  return (
-    <motion.button {...lift} className={clsx(base, styles[variant], sizes[size], className)} {...props} />
-  );
+}: Common & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return <button className={clsx(base, styles[variant], sizes[size], className)} {...props} />;
 }

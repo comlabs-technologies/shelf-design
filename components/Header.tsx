@@ -54,7 +54,7 @@ export function Header() {
         className={clsx(
           "relative mx-auto flex items-center justify-between",
           floating
-            ? "nav-capsule-in h-14 max-w-[400px] rounded-2xl border border-line bg-surface pl-4 pr-2 shadow-nav md:max-w-[760px]"
+            ? "nav-capsule-in h-14 max-w-[400px] rounded-2xl border border-line bg-surface pl-4 pr-2 shadow-float md:max-w-[760px]"
             : "h-[76px] max-w-[1200px] px-5 sm:px-8",
         )}
       >
@@ -79,7 +79,7 @@ export function Header() {
 
         <div className="flex items-center gap-1.5">
           <ButtonLink href="#request" size="sm" className="hidden sm:inline-flex">
-            Request access <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden="true" />
+            Get early access <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden="true" />
           </ButtonLink>
           <ButtonLink href="#request" size="sm" className="px-3.5 sm:hidden">
             Join
@@ -105,7 +105,7 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               className={clsx(
-                "absolute top-full mt-2 rounded-2xl border border-line bg-surface p-2 shadow-nav md:hidden",
+                "absolute top-full mt-2 rounded-2xl border border-line bg-surface p-2 shadow-float md:hidden",
                 floating ? "inset-x-0" : "inset-x-4",
               )}
             >

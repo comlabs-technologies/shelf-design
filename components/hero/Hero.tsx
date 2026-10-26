@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { EmailForm } from "../ui/EmailForm";
+import { SOURCES, SourceBadge } from "../ui/SourceBadge";
 import { DashboardMockup } from "./DashboardMockup";
 import { DESKTOP, NO_MOTION, setupGsap } from "@/lib/gsap";
 
@@ -93,12 +94,12 @@ export function Hero() {
   }, []);
 
   return (
-    <section aria-labelledby="hero-title" className="relative pb-24 pt-[124px] sm:pt-[156px] md:pb-[150px] lg:pt-[196px]">
+    <section aria-labelledby="hero-title" className="relative pb-24 pt-[100px] sm:pt-[132px] md:pb-[150px] lg:pt-[104px]">
       <div ref={copy} className="mx-auto max-w-[1200px] px-5 text-center sm:px-8">
         <p
           data-init
           data-hero
-          className="inline-flex h-8 items-center gap-2 rounded-full border border-line bg-surface px-3.5 text-[13px] tracking-[-0.005em] text-muted-strong"
+          className="tag-lift inline-flex h-8 items-center gap-2 rounded-full bg-surface px-3.5 text-[13px] tracking-[-0.005em] text-muted-strong"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-ink" aria-hidden="true" />
           Your context, remembered
@@ -108,7 +109,7 @@ export function Hero() {
           id="hero-title"
           data-init
           data-hero
-          className="mx-auto mt-6 max-w-[1100px] text-balance text-[44px] font-semibold leading-[1.0] tracking-[-0.05em] sm:text-[60px] md:text-[72px] lg:text-[82px]"
+          className="mx-auto mt-5 max-w-[1100px] text-balance text-[44px] font-semibold leading-[1.0] tracking-[-0.05em] sm:text-[60px] md:text-[72px] lg:text-[78px]"
         >
           <span className="md:block">Everything you meant to keep,</span>{" "}
           <span className="md:block">
@@ -127,19 +128,45 @@ export function Hero() {
         <p
           data-init
           data-hero
-          className="mx-auto mt-6 max-w-[560px] text-pretty text-[17px] leading-[1.55] tracking-[-0.01em] text-muted sm:text-[19px]"
+          className="mx-auto mt-5 max-w-[560px] text-pretty text-[17px] leading-[1.55] tracking-[-0.01em] text-muted sm:text-[18px]"
         >
           Recall turns the links, notes, screenshots, and half-formed ideas you save every day into a
           library you can actually ask.
         </p>
 
-        <div data-init data-hero className="mt-9">
-          <EmailForm align="center" />
-          <p className="-mt-1 text-[13px] text-muted">Private by default. No credit card required.</p>
+        <div data-init data-hero className="mt-8">
+          <EmailForm
+            align="center"
+            note={
+              <>
+                Private by default. No credit card. <span className="text-ink">First 100 members get founder pricing.</span>
+              </>
+            }
+          />
+        </div>
+
+        <div
+          data-init
+          data-hero
+          className="mx-auto mt-6 flex max-w-[1080px] flex-col items-center gap-3 lg:mt-7 lg:flex-row lg:justify-center lg:gap-5"
+        >
+          <p className="shrink-0 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+            Built for people who save professionally
+          </p>
+          <ul
+            className="-mx-5 flex max-w-[calc(100%+40px)] gap-1.5 overflow-x-auto px-5 py-2 scrollbar-none [mask-image:linear-gradient(90deg,transparent,#000_20px,#000_calc(100%-20px),transparent)] lg:mx-0 lg:max-w-none lg:flex-wrap lg:justify-center lg:overflow-visible lg:p-0 lg:[mask-image:none]"
+            aria-label="Saves from"
+          >
+            {(["chrome", "safari", "ios", "slack", "notion", "figma", "linkedin", "x"] as const).map((k) => (
+              <li key={k} className="shrink-0">
+                <SourceBadge source={SOURCES[k]} className="h-7 px-2.5 text-[12.5px]" />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <div ref={stage} className="relative z-0 mx-auto mt-14 max-w-[1200px] px-4 sm:mt-20 sm:px-8">
+      <div ref={stage} className="relative z-0 mx-auto mt-7 max-w-[1200px] px-4 sm:mt-8 sm:px-8">
         <div ref={scrub}>
           <div ref={enter} data-init>
             <DashboardMockup play={play} />

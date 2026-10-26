@@ -22,10 +22,10 @@ export function Privacy() {
               meant only for you. Recall reads it for one reason — to help you find it again.
             </p>
             <div data-reveal className="mt-8 flex flex-wrap gap-2">
-              <span className="inline-flex h-9 items-center gap-2 rounded-full border border-line-strong/70 bg-surface px-3.5 text-[13.5px] font-medium">
+              <span className="tag-lift inline-flex h-9 items-center gap-2 rounded-full bg-surface px-3.5 text-[13.5px] font-medium">
                 <Lock className="h-3.5 w-3.5" strokeWidth={2} aria-hidden="true" /> Private workspace
               </span>
-              <span className="inline-flex h-9 items-center gap-2 rounded-full border border-line-strong/70 bg-surface px-3.5 text-[13.5px] font-medium">
+              <span className="tag-lift inline-flex h-9 items-center gap-2 rounded-full bg-surface px-3.5 text-[13.5px] font-medium">
                 <Download className="h-3.5 w-3.5" strokeWidth={2} aria-hidden="true" /> Export anytime
               </span>
             </div>

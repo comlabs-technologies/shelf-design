@@ -196,10 +196,11 @@ export function FallingTags() {
               ref={(n) => {
                 inner.current[i] = n;
               }}
-              className="flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full border border-line-strong/80 bg-surface px-3 text-[12px] font-medium tracking-[-0.01em] text-ink/80 shadow-[0_4px_14px_rgba(20,20,18,.06)] sm:h-11 sm:gap-2 sm:px-4 sm:text-[14.5px]"
             >
-              <tag.icon className="h-3.5 w-3.5 text-muted-strong sm:h-4 sm:w-4" strokeWidth={1.8} />
-              {tag.label}
+              <span className="tag-lift pointer-events-auto flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full bg-surface px-3 text-[12px] font-medium tracking-[-0.01em] text-ink/80 sm:h-11 sm:gap-2 sm:px-4 sm:text-[14.5px]">
+                <tag.icon className="h-3.5 w-3.5 text-muted-strong sm:h-4 sm:w-4" strokeWidth={1.8} />
+                {tag.label}
+              </span>
             </div>
           </div>
         </div>

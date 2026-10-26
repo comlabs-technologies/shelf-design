@@ -226,7 +226,7 @@ export function DashboardMockup({ play }: { play: boolean }) {
                 key={c.name}
                 className={clsx(
                   "flex h-8 items-center gap-2 rounded-lg px-2",
-                  c.active ? "bg-lime font-medium text-ink" : "text-muted-strong",
+                  c.active ? "ui-focus bg-lime font-medium text-ink" : "text-muted-strong",
                 )}
               >
                 <span
@@ -294,7 +294,7 @@ export function DashboardMockup({ play }: { play: boolean }) {
                 data-result
                 className={clsx(
                   "flex gap-3 rounded-card border p-3",
-                  i === 0 ? "border-line bg-paper" : "border-transparent",
+                  i === 0 ? "ui-focus border-line bg-surface" : "border-transparent",
                   i > 2 && "hidden sm:flex",
                 )}
               >
@@ -317,7 +317,7 @@ export function DashboardMockup({ play }: { play: boolean }) {
 
         {/* Detail panel — layered card over a quiet rail */}
         <div className="hidden border-l border-line bg-[#FBFBF8] p-4 lg:block">
-          <div data-init data-detail className="rounded-card border border-line bg-surface p-4 shadow-[0_8px_22px_rgba(20,20,18,.05)]">
+          <div data-init data-detail className="rounded-card border border-line bg-surface p-4">
             <div className="mb-3 overflow-hidden rounded-[9px] border border-line bg-paper" aria-hidden="true">
               <div className="flex h-4 items-center gap-1 border-b border-line bg-surface px-2">
                 <span className="h-1 w-1 rounded-full bg-ink/20" />

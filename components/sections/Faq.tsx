@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import clsx from "clsx";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { Eyebrow, SectionTitle } from "../ui/Eyebrow";
@@ -24,7 +25,7 @@ const faqs = [
   },
   {
     q: "When will Recall be available?",
-    a: "We’re opening access in small groups through the early-access list, starting with founders, designers, and researchers. Request access and we’ll email you when your spot is ready.",
+    a: "We’re opening the private beta in small groups, starting with founders, designers, and researchers. Join the list and we’ll email you when your spot is ready — the first 100 members get founder pricing.",
   },
 ];
 
@@ -44,13 +45,29 @@ export function Faq() {
           </SectionTitle>
         </div>
 
-        <div data-reveal className="mt-14 border-t border-line">
+        <div data-reveal className="mt-14 space-y-2.5">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             const btn = `${base}-q${i}`;
             const panel = `${base}-a${i}`;
             return (
-              <div key={f.q} className="border-b border-line">
+              <div
+                key={f.q}
+                className={clsx(
+                  "relative overflow-hidden rounded-[16px] border bg-paper transition-[transform,box-shadow,border-color,background-color] duration-200 ease-recall",
+                  isOpen
+                    ? "border-line-strong/70 bg-surface"
+                    : "border-line hover:-translate-y-px hover:border-line-strong/80 hover:shadow-[0_7px_18px_rgba(25,25,24,.06)] motion-reduce:hover:translate-y-0",
+                )}
+              >
+                {/* Thin lime indicator marks the open row instead of a heavy shadow. */}
+                <span
+                  aria-hidden="true"
+                  className={clsx(
+                    "absolute bottom-5 left-0 top-5 w-[3px] rounded-r-full bg-lime transition-opacity duration-200",
+                    isOpen ? "opacity-100" : "opacity-0",
+                  )}
+                />
                 <h3>
                   <button
                     id={btn}
@@ -58,13 +75,14 @@ export function Faq() {
                     aria-expanded={isOpen}
                     aria-controls={panel}
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="group flex w-full items-center justify-between gap-6 py-6 text-left sm:py-7"
+                    className="group flex w-full items-center justify-between gap-6 rounded-[16px] px-5 py-5 text-left sm:px-7 sm:py-6"
                   >
-                    <span className="text-[18px] font-medium tracking-[-0.025em] text-ink sm:text-[21px]">{f.q}</span>
+                    <span className="text-[17px] font-medium tracking-[-0.025em] text-ink sm:text-[20px]">{f.q}</span>
                     <span
-                      className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-colors duration-200 ${
-                        isOpen ? "border-ink bg-ink text-paper" : "border-line bg-surface text-ink group-hover:border-line-strong"
-                      }`}
+                      className={clsx(
+                        "grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-colors duration-200",
+                        isOpen ? "border-ink bg-ink text-paper" : "border-line bg-surface text-ink group-hover:border-line-strong",
+                      )}
                       aria-hidden="true"
                     >
                       <motion.span animate={{ rotate: isOpen ? 45 : 0 }} transition={t} className="grid">
@@ -85,7 +103,7 @@ export function Faq() {
                       transition={t}
                       className="overflow-hidden"
                     >
-                      <p className="max-w-[680px] pb-7 pr-12 text-[16px] leading-[1.65] text-muted-strong">{f.a}</p>
+                      <p className="max-w-[680px] px-5 pb-6 pr-14 text-[16px] leading-[1.65] text-muted-strong sm:px-7 sm:pb-7">{f.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

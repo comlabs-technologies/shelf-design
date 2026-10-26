@@ -27,3 +27,19 @@ npm run build
 - `prefers-reduced-motion: reduce` shows every final state immediately: no pinning, no typing, no reveals.
 
 The email forms simulate submission client-side; connect `EmailForm`'s `submit` to a real waitlist endpoint.
+
+## Before launch
+
+- `components/sections/BetaVoices.tsx` holds **placeholder** social proof (`BETA_COUNT`, the two quotes and the founder note). Replace with real, attributable beta feedback — the count is reused in the final CTA.
+- The "~1 hr vs seconds" comparison in the Why Recall section is illustrative; swap in a measured figure when you have one.
+- Source logos come from `simple-icons`. Slack and LinkedIn aren't distributed there at the brands' request, so they use neutral glyphs.
+
+## Shadow system
+
+Tokens live in `app/globals.css` (`--shadow-sm|md|lg|float|focus`, button and field shadows) with matching Tailwind `shadow-*` utilities. Use them by role:
+
+- `.btn-press` — primary buttons: lifted, rise 2px on hover, sink 1px on press
+- `.tag-lift` — tags, pills and source badges
+- `.ui-focus` — the one selected state in a mockup (active result, selected collection, extension save)
+- `.field-inset` — inputs (inset, lime focus ring)
+- `shadow-float` — the floating header capsule

@@ -174,7 +174,7 @@ function SearchByMeaning() {
           >
             <SearchField value={ex.query} caret={false} className="h-12" />
 
-            <div className="mt-3 flex gap-4 rounded-card border border-line bg-surface p-3 sm:p-4">
+            <div className="ui-focus mt-3 flex gap-4 rounded-card border border-line bg-surface p-3 sm:p-4">
               <div className="h-[76px] w-[104px] shrink-0 overflow-hidden rounded-[9px] border border-line bg-paper p-1.5">
                 <Thumb kind={ex.result.thumb} />
               </div>
@@ -326,7 +326,7 @@ function KeepItPrivate() {
         </ul>
         <div className="flex items-center justify-between border-t border-line bg-paper px-4 py-3">
           <span className="text-[12px] text-muted">.zip · Markdown · JSON</span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1 text-[12px] font-medium">
+          <span className="tag-lift inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1 text-[12px] font-medium">
             <Download className="h-3 w-3" strokeWidth={2.2} /> Export library
           </span>
         </div>
