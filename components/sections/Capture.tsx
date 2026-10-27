@@ -87,32 +87,32 @@ function SavePopover({ step }: { step: number }) {
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.32, ease }}
           style={{ transformOrigin: "90% 0%" }}
-          className="absolute right-3 top-[50px] z-20 w-[284px] overflow-hidden rounded-[14px] border border-line bg-surface shadow-focus"
+          className="absolute right-3 top-[50px] z-20 w-[284px] overflow-hidden rounded-[14px] border border-white/30 bg-white/[0.16] text-white shadow-[0_24px_60px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.3)] backdrop-blur-2xl backdrop-saturate-150"
         >
-          <div className="flex items-center justify-between border-b border-line px-3.5 py-2.5">
+          <div className="flex items-center justify-between border-b border-white/15 px-3.5 py-2.5">
             <span className="flex items-center gap-2 text-[12.5px] font-medium">
               <LogoMark className="h-4 w-4" /> Saved to Recall
             </span>
-            <span className="grid h-5 w-5 place-items-center rounded-full bg-ink text-paper">
+            <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-ink">
               <Check className="h-3 w-3" strokeWidth={2.6} />
             </span>
           </div>
           <div className="flex gap-2.5 px-3.5 py-3">
-            <div className="h-10 w-12 shrink-0 rounded-md border border-line bg-paper p-1.5">
-              <div className="h-1 w-4/5 rounded bg-ink/50" />
-              <div className="mt-1 h-[3px] w-full rounded bg-ink/10" />
-              <div className="mt-[3px] h-[3px] w-3/4 rounded bg-ink/10" />
+            <div className="h-10 w-12 shrink-0 rounded-md border border-white/20 bg-white/10 p-1.5">
+              <div className="h-1 w-4/5 rounded bg-white/60" />
+              <div className="mt-1 h-[3px] w-full rounded bg-white/25" />
+              <div className="mt-[3px] h-[3px] w-3/4 rounded bg-white/25" />
             </div>
             <div className="min-w-0">
               <p className="truncate text-[12.5px] font-medium tracking-[-0.01em]">Price on the moment value shows up</p>
-              <p className="text-[11px] text-muted">pricewell.studio</p>
+              <p className="text-[11px] text-white/60">pricewell.studio</p>
             </div>
           </div>
           <div className="flex items-center justify-between px-3.5 pb-3 text-[11.5px]">
-            <span className="text-muted">Collection</span>
+            <span className="text-white/60">Collection</span>
             <span className="flex items-center gap-1.5">
-              <span className="text-[10.5px] text-muted">Suggested</span>
-              <span className="tag-lift rounded-full bg-lime px-2 py-0.5 font-medium">Fundraising</span>
+              <span className="text-[10.5px] text-white/60">Suggested</span>
+              <span className="rounded-full bg-lime px-2 py-0.5 font-medium text-ink">Fundraising</span>
             </span>
           </div>
 
@@ -126,23 +126,23 @@ function SavePopover({ step }: { step: number }) {
                 transition={{ duration: 0.3, ease }}
                 className="overflow-hidden"
               >
-                <div className="border-t border-line px-3.5 pb-3.5 pt-3">
-                  <p className="text-[11px] font-medium text-ink">Why are you keeping this?</p>
-                  <div className="mt-1.5 min-h-[52px] rounded-[10px] border border-ink/30 bg-paper px-2.5 py-2 text-[12px] leading-[1.45] text-ink">
+                <div className="border-t border-white/15 px-3.5 pb-3.5 pt-3">
+                  <p className="text-[11px] font-medium text-white">Why are you keeping this?</p>
+                  <div className="mt-1.5 min-h-[52px] rounded-[10px] border border-white/40 bg-white/10 px-2.5 py-2 text-[12px] leading-[1.45] text-white [&_.caret]:bg-white">
                     {value}
                     <span className="caret" />
                   </div>
-                  <p className="mt-2.5 text-[10.5px] text-muted">Recall will also remember</p>
+                  <p className="mt-2.5 text-[10.5px] text-white/60">Recall will also remember</p>
                   <div className="mt-1 flex flex-wrap gap-1">
                     {["pricing", "usage-based", "investor deck"].map((t) => (
-                      <span key={t} className="rounded-full bg-sand px-2 py-0.5 text-[10.5px] text-muted-strong">
+                      <span key={t} className="rounded-full bg-white/15 px-2 py-0.5 text-[10.5px] text-white/85">
                         {t}
                       </span>
                     ))}
                   </div>
                   <div className="mt-3 flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-muted">esc to skip</span>
-                    <span className="rounded-full bg-ink px-2.5 py-1 text-[11px] font-medium text-paper">Save ↵</span>
+                    <span className="font-mono text-[10px] text-white/55">esc to skip</span>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[11px] font-medium text-ink">Save ↵</span>
                   </div>
                 </div>
               </motion.div>
@@ -160,29 +160,29 @@ function PhoneShare({ show }: { show: boolean }) {
       initial={false}
       animate={{ opacity: show ? 1 : 0, y: show ? 0 : 28 }}
       transition={{ duration: 0.4, ease }}
-      className="absolute bottom-0 left-0 z-20 h-[250px] w-[150px] overflow-hidden rounded-[30px] border border-line bg-sand p-1.5 shadow-[0_18px_40px_rgba(20,20,18,.12)]"
+      className="absolute bottom-0 left-0 z-20 h-[250px] w-[150px] overflow-hidden rounded-[30px] border border-white/30 bg-white/10 p-1.5 shadow-[0_24px_60px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.3)] backdrop-blur-2xl backdrop-saturate-150"
     >
-      <div className="relative h-full overflow-hidden rounded-[24px] bg-surface">
-        <div className="mx-auto mt-2 h-3.5 w-12 rounded-full bg-ink" />
+      <div className="relative h-full overflow-hidden rounded-[24px] border border-white/15 bg-white/[0.08]">
+        <div className="mx-auto mt-2 h-3.5 w-12 rounded-full bg-black/70" />
         <div className="space-y-1.5 px-3 pt-4">
-          <div className="h-1.5 w-4/5 rounded bg-ink/40" />
-          <div className="h-1 w-full rounded bg-ink/10" />
-          <div className="h-1 w-5/6 rounded bg-ink/10" />
+          <div className="h-1.5 w-4/5 rounded bg-white/60" />
+          <div className="h-1 w-full rounded bg-white/25" />
+          <div className="h-1 w-5/6 rounded bg-white/25" />
         </div>
-        <div className="absolute inset-x-0 bottom-0 rounded-t-[18px] border-t border-line bg-paper px-2.5 pb-3 pt-2">
-          <div className="mx-auto mb-2 h-1 w-7 rounded-full bg-line-strong" />
-          <p className="mb-2 text-[8.5px] font-medium text-muted-strong">Share</p>
+        <div className="absolute inset-x-0 bottom-0 rounded-t-[18px] border-t border-white/25 bg-white/20 px-2.5 pb-3 pt-2 text-white backdrop-blur-xl">
+          <div className="mx-auto mb-2 h-1 w-7 rounded-full bg-white/50" />
+          <p className="mb-2 text-[8.5px] font-medium text-white/80">Share</p>
           <div className="flex justify-between">
             <div className="flex flex-col items-center gap-1">
-              <span className="rounded-[9px] ring-2 ring-lime ring-offset-1 ring-offset-paper">
+              <span className="rounded-[9px] ring-2 ring-lime">
                 <LogoMark className="h-7 w-7" />
               </span>
               <span className="text-[8px] font-medium">Recall</span>
             </div>
             {["Mail", "Notes"].map((a) => (
               <div key={a} className="flex flex-col items-center gap-1">
-                <span className="h-7 w-7 rounded-[8px] bg-surface ring-1 ring-line" />
-                <span className="text-[8px] text-muted">{a}</span>
+                <span className="h-7 w-7 rounded-[8px] bg-white/25 ring-1 ring-white/30" />
+                <span className="text-[8px] text-white/70">{a}</span>
               </div>
             ))}
           </div>
@@ -195,25 +195,25 @@ function PhoneShare({ show }: { show: boolean }) {
 function CaptureStage({ step }: { step: number }) {
   return (
     <ScaledStage width={640} height={500} className="mx-auto max-w-[640px]">
-      <div className="absolute bottom-10 left-12 right-0 top-0 overflow-hidden rounded-2xl border border-line bg-surface shadow-mock">
+      <div className="absolute bottom-10 left-12 right-0 top-0 overflow-hidden rounded-2xl border border-white/25 bg-white/[0.1] text-white shadow-[0_30px_80px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.28)] backdrop-blur-2xl backdrop-saturate-150">
         {/* chrome */}
-        <div className="flex h-12 items-center gap-2.5 border-b border-line bg-[#FCFCFA] px-4">
+        <div className="flex h-12 items-center gap-2.5 border-b border-white/15 bg-white/[0.06] px-4">
           <div className="mr-1 flex gap-1.5">
             {[0, 1, 2].map((i) => (
-              <span key={i} className="h-2.5 w-2.5 rounded-full bg-[#E4E3DC]" />
+              <span key={i} className="h-2.5 w-2.5 rounded-full bg-white/35" />
             ))}
           </div>
-          <ArrowLeft className="h-3.5 w-3.5 text-muted" strokeWidth={2} />
-          <ArrowRight className="h-3.5 w-3.5 text-line-strong" strokeWidth={2} />
-          <RotateCw className="h-3.5 w-3.5 text-muted" strokeWidth={2} />
-          <div className="flex h-7 flex-1 items-center gap-1.5 rounded-full bg-paper px-3 text-[11.5px] text-muted-strong">
+          <ArrowLeft className="h-3.5 w-3.5 text-white/70" strokeWidth={2} />
+          <ArrowRight className="h-3.5 w-3.5 text-white/35" strokeWidth={2} />
+          <RotateCw className="h-3.5 w-3.5 text-white/70" strokeWidth={2} />
+          <div className="flex h-7 flex-1 items-center gap-1.5 rounded-full bg-white/10 px-3 text-[11.5px] text-white/80">
             <Lock className="h-3 w-3" strokeWidth={2} /> pricewell.studio/usage-first-pricing
           </div>
-          <span className="h-5 w-5 rounded-md bg-sand" />
+          <span className="h-5 w-5 rounded-md bg-white/15" />
           <span
             className={clsx(
               "grid h-8 w-8 place-items-center rounded-[10px] transition-colors duration-300",
-              step >= 1 ? "bg-sand" : "bg-transparent",
+              step >= 1 ? "bg-white/20" : "bg-transparent",
             )}
           >
             <LogoMark className="h-5 w-5" />
@@ -222,20 +222,23 @@ function CaptureStage({ step }: { step: number }) {
 
         {/* page */}
         <div className="px-10 pt-8">
-          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Essay · 8 min read</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">Essay · 8 min read</p>
           <p className="mt-2 max-w-[330px] text-[25px] font-semibold leading-[1.08] tracking-[-0.04em]">
             Price on the moment value shows up.
           </p>
-          <div className="mt-3 flex items-center gap-2 text-[11px] text-muted">
-            <span className="h-5 w-5 rounded-full bg-sand" /> Dana Whitfield · Pricewell
+          <div className="mt-3 flex items-center gap-2 text-[11px] text-white/60">
+            <span className="h-5 w-5 rounded-full bg-white/20" /> Dana Whitfield · Pricewell
           </div>
-          <p className="mt-4 max-w-[400px] text-[12.5px] leading-[1.65] text-muted-strong">
+          <p className="mt-4 max-w-[400px] text-[12.5px] leading-[1.65] text-white/70">
             Most teams price on seats because it&rsquo;s easy to explain.{" "}
             <motion.span
               initial={false}
-              animate={{ backgroundColor: step === 0 ? "rgba(168,243,106,.55)" : "rgba(168,243,106,0)" }}
+              animate={{
+                backgroundColor: step === 0 ? "rgba(168,243,106,.9)" : "rgba(168,243,106,0)",
+                color: step === 0 ? "#191918" : "rgba(255,255,255,.95)",
+              }}
               transition={{ duration: 0.4, ease }}
-              className="rounded-[3px] text-ink [box-decoration-break:clone]"
+              className="rounded-[3px] [box-decoration-break:clone]"
             >
               The best ones price on the moment value shows up, and let seats follow.
             </motion.span>{" "}
@@ -247,18 +250,18 @@ function CaptureStage({ step }: { step: number }) {
               ["Team", "$12"],
               ["Scale", "Usage"],
             ].map(([n, p], i) => (
-              <div key={n} className={clsx("rounded-lg border p-2.5", i === 2 ? "border-ink/30" : "border-line")}>
-                <p className="text-[10px] text-muted">{n}</p>
+              <div key={n} className={clsx("rounded-lg border bg-white/[0.06] p-2.5", i === 2 ? "border-white/45" : "border-white/15")}>
+                <p className="text-[10px] text-white/55">{n}</p>
                 <p className="text-[14px] font-semibold tracking-[-0.03em]">{p}</p>
-                <div className="mt-1.5 h-1 w-3/4 rounded bg-ink/10" />
+                <div className="mt-1.5 h-1 w-3/4 rounded bg-white/20" />
               </div>
             ))}
           </div>
-          <p className="mt-5 max-w-[400px] text-[11px] text-muted">Fig. 2 — Usage tier anchors the story; seats follow.</p>
+          <p className="mt-5 max-w-[400px] text-[11px] text-white/50">Fig. 2 — Usage tier anchors the story; seats follow.</p>
           <div className="mt-4 max-w-[400px] space-y-2" aria-hidden="true">
-            <div className="h-1.5 w-full rounded bg-ink/[0.07]" />
-            <div className="h-1.5 w-11/12 rounded bg-ink/[0.07]" />
-            <div className="h-1.5 w-4/5 rounded bg-ink/[0.07]" />
+            <div className="h-1.5 w-full rounded bg-white/15" />
+            <div className="h-1.5 w-11/12 rounded bg-white/15" />
+            <div className="h-1.5 w-4/5 rounded bg-white/15" />
           </div>
         </div>
 
