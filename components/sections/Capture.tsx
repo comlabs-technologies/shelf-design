@@ -265,9 +265,12 @@ function CaptureStage({ step }: { step: number }) {
           </div>
         </div>
 
-        <SavePopover step={step} />
         <Cursor step={step} />
       </div>
+      {/* Outside the window on purpose: a backdrop blur nested inside another
+          blurred surface can't see that surface's content, so the page text
+          would show through crisp. Same position (window is flush top-right). */}
+      <SavePopover step={step} />
       <PhoneShare show={step === 1} />
     </ScaledStage>
   );
