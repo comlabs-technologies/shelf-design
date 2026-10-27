@@ -3,20 +3,20 @@ import { AvatarStack } from "../ui/AvatarStack";
 import { EmailForm } from "../ui/EmailForm";
 import { BETA_COUNT } from "./BetaVoices";
 
-/** Closes the loop with the hero: the statue returns, the copy sits in its sky. */
+/** Closes the page: the visor-wearing David looks on, the copy sits in the open space. */
 export function FinalCta() {
   return (
     <section id="request" aria-labelledby="cta-title" className="px-3 pb-24 sm:px-5 sm:pb-32 xl:px-9">
-      <div className="relative mx-auto max-w-[1600px] overflow-hidden rounded-[28px] bg-[#F3F2EE]">
+      <div className="relative mx-auto max-w-[1600px] overflow-hidden rounded-[28px] bg-[#F6F4EF]">
         <div aria-hidden="true" className="relative aspect-[4/3] w-full sm:aspect-[16/9] lg:absolute lg:inset-0 lg:aspect-auto">
           <Image
-            src="/hero-statue.webp"
+            src="/cta-david.webp"
             alt=""
             fill
             sizes="(min-width: 1024px) 1600px, 100vw"
-            className="object-cover object-[85%_30%] lg:object-[80%_40%]"
+            className="object-cover object-[92%_30%] lg:object-[100%_35%]"
           />
-          <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#F3F2EE] to-transparent lg:hidden" />
+          <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#F6F4EF] to-transparent lg:hidden" />
         </div>
 
         <div className="relative px-6 pb-14 sm:px-12 lg:max-w-[640px] lg:px-20 lg:py-32">
