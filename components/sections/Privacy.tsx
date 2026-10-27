@@ -10,7 +10,7 @@ const promises = [
 export function Privacy() {
   return (
     <section id="privacy" aria-labelledby="privacy-title" className="px-3 sm:px-5">
-      <div className="mx-auto max-w-[1280px] rounded-[28px] bg-sand px-5 py-20 sm:px-10 sm:py-28 lg:px-16">
+      <div className="mx-auto max-w-[1600px] rounded-[28px] bg-sand px-5 py-20 sm:px-10 sm:py-28 lg:px-16">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           <div>
             <Eyebrow data-reveal>Privacy</Eyebrow>

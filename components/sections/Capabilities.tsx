@@ -338,7 +338,7 @@ function KeepItPrivate() {
 export function Capabilities() {
   return (
     <section aria-labelledby="capabilities-title" className="pb-24 pt-28 sm:pb-36 sm:pt-40">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="mx-auto max-w-[1600px] px-5 sm:px-8 xl:px-12">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-end">
           <div>
             <Eyebrow data-reveal>What Recall does</Eyebrow>

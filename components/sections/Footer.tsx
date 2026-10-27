@@ -9,7 +9,7 @@ const links = [
 export function Footer() {
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-5 py-12 sm:flex-row sm:items-end sm:justify-between sm:px-8">
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-8 px-5 py-12 sm:flex-row sm:items-end sm:justify-between sm:px-8 xl:px-12">
         <div>
           <Logo />
           <p className="mt-3 text-[14px] text-muted">A memory layer for your work.</p>

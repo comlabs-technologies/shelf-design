@@ -25,7 +25,7 @@ const quotes = [
 export function BetaVoices() {
   return (
     <section aria-labelledby="beta-title" className="pb-24 sm:pb-32">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="mx-auto max-w-[1600px] px-5 sm:px-8 xl:px-12">
         <div className="flex flex-col gap-5 border-t border-line pt-14 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <Eyebrow data-reveal>In the private beta</Eyebrow>

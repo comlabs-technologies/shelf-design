@@ -59,7 +59,7 @@ function Answer() {
 export function Ecosystem() {
   return (
     <section aria-labelledby="ecosystem-title" className="py-24 sm:py-32">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="mx-auto max-w-[1600px] px-5 sm:px-8 xl:px-12">
         <div className="mx-auto max-w-[640px] text-center">
           <Eyebrow data-reveal>Every source, one library</Eyebrow>
           <SectionTitle id="ecosystem-title" data-reveal className="mt-4">

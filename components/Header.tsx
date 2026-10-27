@@ -55,7 +55,7 @@ export function Header() {
           "relative mx-auto flex items-center justify-between",
           floating
             ? "nav-capsule-in h-14 max-w-[400px] rounded-2xl border border-line bg-surface pl-4 pr-2 shadow-float md:max-w-[760px]"
-            : "h-[76px] max-w-[1200px] px-5 sm:px-8",
+            : "h-[76px] max-w-[1600px] px-5 sm:px-8 xl:px-12",
         )}
       >
         <a href="#top" aria-label="Recall home" className="rounded-lg">

@@ -62,7 +62,7 @@ export function Audience() {
 
   return (
     <section aria-labelledby="audience-title" className="pb-24 sm:pb-32">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="mx-auto max-w-[1600px] px-5 sm:px-8 xl:px-12">
         <Eyebrow data-reveal>Who it&rsquo;s for</Eyebrow>
         <SectionTitle id="audience-title" data-reveal className="mt-4 max-w-[640px]">
           For people whose work is made of references.

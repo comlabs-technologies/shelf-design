@@ -126,7 +126,7 @@ export function Hero() {
         />
       </div>
 
-      <div ref={copy} className="mx-auto max-w-[1200px] px-5 pt-[100px] sm:px-8 sm:pt-[132px] lg:pt-[160px]">
+      <div ref={copy} className="mx-auto max-w-[1600px] px-5 pt-[100px] sm:px-8 xl:px-12 sm:pt-[132px] lg:pt-[160px]">
         <div className="max-w-[640px]">
           <p
             data-init
@@ -141,7 +141,7 @@ export function Hero() {
             id="hero-title"
             data-init
             data-hero
-            className="mt-5 text-[44px] font-semibold leading-[1.0] tracking-[-0.05em] sm:text-[60px] lg:text-[72px]"
+            className="mt-5 text-[44px] font-medium leading-[1.0] tracking-[-0.055em] sm:text-[60px] lg:text-[72px]"
           >
             Everything you meant to keep,{" "}
             <span className="relative isolate inline-block">
@@ -192,7 +192,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div ref={stage} className="relative z-[1] mx-auto -mt-24 max-w-[1200px] px-4 sm:-mt-32 sm:px-8 lg:mt-[84px]">
+      <div ref={stage} className="relative z-[1] mx-auto -mt-24 max-w-[1280px] px-4 sm:-mt-32 sm:px-8 lg:mt-[84px]">
         <div ref={scrub}>
           <div ref={enter} data-init>
             <DashboardMockup play={play} />

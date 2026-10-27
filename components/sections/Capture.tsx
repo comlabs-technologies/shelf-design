@@ -282,7 +282,7 @@ export function Capture() {
   return (
     <section id="capture" ref={section} aria-labelledby="capture-title" className="relative pt-28 sm:pt-36 lg:h-[320vh] lg:pt-0">
       <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center">
-        <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-16 lg:pt-16">
+        <div className="mx-auto grid w-full max-w-[1600px] grid-cols-1 gap-12 px-5 sm:px-8 xl:px-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-16 lg:pt-16">
           <div>
             <Eyebrow data-reveal>Capture without breaking flow</Eyebrow>
             <SectionTitle id="capture-title" data-reveal className="mt-4 max-w-[440px]">

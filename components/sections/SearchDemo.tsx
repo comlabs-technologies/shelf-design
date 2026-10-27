@@ -79,11 +79,11 @@ export function SearchDemo() {
     >
       <CurveDivider shape="dome" className="bottom-[calc(100%-1px)]" />
 
-      <div data-reveal className="mx-auto max-w-[1200px] px-5 pb-16 sm:px-8 sm:pb-24">
+      <div data-reveal className="mx-auto max-w-[1600px] px-5 pb-16 sm:px-8 xl:px-12 sm:pb-24">
         <CredibilityStrip />
       </div>
 
-      <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-14 px-5 sm:px-8 xl:px-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div className="lg:pt-10">
           <Eyebrow data-reveal>Why Recall</Eyebrow>
           <SectionTitle id="search-title" data-reveal className="mt-4 max-w-[480px]">
