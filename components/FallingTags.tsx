@@ -41,8 +41,8 @@ const tags: Tag[] = [
 type Pose = { x: number; y: number; rot: number };
 type Shape = "dome" | "bowl" | "valley";
 
-// An invisible V-shaped floor: near-straight sides falling from both top
-// corners to a softly rounded low point in the middle.
+// A V-shaped floor that is also the section's bottom edge: near-straight
+// sides falling from both top corners to a softly rounded low point.
 const VALLEY = [
   [0, 0],
   [620, 160],
@@ -179,7 +179,22 @@ export function FallingTags({ shape = "dome" }: { shape?: Shape }) {
         shape === "bowl" && "top-[calc(100%-1px)]",
       )}
     >
-      {shape !== "valley" && <CurveDivider shape={shape} className="inset-y-0" />}
+      {shape === "valley" ? (
+        // The section ends along the valley: paper fills everything below the line.
+        <svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          className="absolute inset-0 block h-full w-full"
+        >
+          <path
+            d={`M${VALLEY[0]} C ${VALLEY[1]} ${VALLEY[2]} ${VALLEY[3]} V121 H0 Z`}
+            fill="#FAFAF7"
+          />
+        </svg>
+      ) : (
+        <CurveDivider shape={shape} className="inset-y-0" />
+      )}
       {tags.map((tag, i) => (
         <div
           key={tag.label}
