@@ -39,7 +39,15 @@ const tags: Tag[] = [
 ];
 
 type Pose = { x: number; y: number; rot: number };
-type Shape = "dome" | "bowl" | "valley";
+type Shape = "dome" | "bowl" | "valley" | "flat";
+
+// A straight floor along the bottom edge of the box.
+const FLAT = [
+  [0, 120],
+  [480, 120],
+  [960, 120],
+  [1440, 120],
+] as const;
 
 // A V-shaped floor that is also the section's bottom edge: near-straight
 // sides falling from both top corners to a softly rounded low point.
@@ -57,7 +65,7 @@ const bezD = (a: number, b: number, c: number, d: number, t: number) =>
 
 /** Point and tangent on the curve at horizontal fraction `fx`, in pixels. */
 function onCurve(shape: Shape, fx: number, w: number, h: number) {
-  const [p0, p1, p2, p3] = shape === "valley" ? VALLEY : CURVES[shape];
+  const [p0, p1, p2, p3] = shape === "valley" ? VALLEY : shape === "flat" ? FLAT : CURVES[shape];
   const target = fx * 1440;
   let lo = 0;
   let hi = 1;
@@ -111,12 +119,13 @@ export function FallingTags({ shape = "dome" }: { shape?: Shape }) {
         const len = Math.hypot(p.dx, p.dy);
         const nx = p.dy / len;
         const ny = -p.dx / len;
-        const tilt = (tag.tilt * Math.PI) / 180;
+        const tiltDeg = shape === "flat" && Math.abs(tag.tilt) > 20 ? tag.tilt * 0.35 : tag.tilt;
+        const tilt = (tiltDeg * Math.PI) / 180;
         const lift = th / 2 + level * th * 0.88 + (Math.abs(Math.sin(tilt)) * (tw - th)) / 2;
         const pose = {
           x: p.x + nx * lift - tw / 2,
           y: p.y + ny * lift - th / 2,
-          rot: (Math.atan2(p.dy, p.dx) * 180) / Math.PI + tag.tilt,
+          rot: (Math.atan2(p.dy, p.dx) * 180) / Math.PI + tiltDeg,
         };
         poses.current[i] = pose;
         gsap.set(node, { x: pose.x, y: pose.y });
@@ -141,7 +150,7 @@ export function FallingTags({ shape = "dome" }: { shape?: Shape }) {
         .map((tag, i) => ({ tag, i }))
         .filter(({ tag }) => !compact || tag.compact)
         .sort((a, b) => (a.tag.level ?? 0) - (b.tag.level ?? 0));
-      // Bowl: drop through the open space above the floor, not across the copy.
+      // Floor shapes: drop through the open space above the floor, not across the copy.
       const fall = shape !== "dome" ? 220 : Math.min(window.innerHeight * 0.8, 720);
 
       ScrollTrigger.create({
@@ -152,15 +161,15 @@ export function FallingTags({ shape = "dome" }: { shape?: Shape }) {
           const tl = gsap.timeline();
           drops.forEach(({ tag, i }, n) => {
             const at = n * 0.055 + (tag.level ?? 0) * 0.18 + Math.random() * 0.04;
-            const dur = 0.5 + Math.random() * 0.12;
+            // Spring landing: drop, hit the floor, bounce twice and settle.
+            const dur = 0.95 + Math.random() * 0.15;
             const kick = (i % 2 ? 1 : -1) * (14 + Math.random() * 10);
             const rot = poses.current[i]?.rot ?? 0;
             const mid = inner.current[i]?.parentElement;
             if (!mid) return;
-            tl.fromTo(mid, { y: -fall }, { y: 0, duration: dur, ease: "power2.in" }, at)
+            tl.fromTo(mid, { y: -fall }, { y: 0, duration: dur, ease: "bounce.out" }, at)
               .fromTo(mid, { opacity: 0 }, { opacity: 1, duration: 0.14, ease: "none" }, at)
-              .fromTo(inner.current[i], { rotation: rot + kick }, { rotation: rot + kick * 0.2, duration: dur, ease: "none" }, at)
-              .to(inner.current[i], { rotation: rot, duration: 0.3, ease: "recall" }, at + dur);
+              .fromTo(inner.current[i], { rotation: rot + kick }, { rotation: rot, duration: dur + 0.25, ease: "elastic.out(1, 0.5)" }, at);
           });
         },
       });
@@ -175,11 +184,12 @@ export function FallingTags({ shape = "dome" }: { shape?: Shape }) {
       className={clsx(
         "pointer-events-none absolute inset-x-0 overflow-x-clip",
         shape === "valley" ? "bottom-0 h-[110px] sm:h-[170px] lg:h-[240px]" : "h-[44px] sm:h-[80px] lg:h-[120px]",
+        shape === "flat" && "bottom-0",
         shape === "dome" && "bottom-[calc(100%-1px)]",
         shape === "bowl" && "top-[calc(100%-1px)]",
       )}
     >
-      {shape === "valley" ? (
+      {shape === "flat" ? null : shape === "valley" ? (
         // The section ends along the valley: paper fills everything below the line.
         <svg
           viewBox="0 0 1440 120"

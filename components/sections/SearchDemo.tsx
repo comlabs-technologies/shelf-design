@@ -143,7 +143,7 @@ export function SearchDemo() {
     <section
       id="search"
       aria-labelledby="search-title"
-      className="relative z-10 bg-sand pb-[170px] pt-14 sm:pb-[250px] sm:pt-20 lg:pb-[330px]"
+      className="relative z-10 bg-sand pb-36 pt-14 sm:pb-48 sm:pt-20 lg:pb-56"
     >
       <div data-reveal className="mx-auto max-w-[1600px] px-5 pb-16 sm:px-8 sm:pb-24 xl:px-12">
         <CredibilityStrip />
@@ -175,7 +175,7 @@ export function SearchDemo() {
       </div>
 
       {/* Everything you saved lands here: tags drop onto the floor. */}
-      <FallingTags shape="valley" />
+      <FallingTags shape="flat" />
     </section>
   );
 }
