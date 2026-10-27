@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { Eyebrow, SectionTitle } from "../ui/Eyebrow";
 import { type SourceKind } from "../ui/SourceChip";
 
@@ -64,12 +65,12 @@ export function Audience() {
 
         <ul
           data-reveal
-          className="-mx-5 mt-20 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 scrollbar-none sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0"
+          className="-mx-5 mt-20 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 scrollbar-none sm:-mx-8 sm:px-8 xl:mx-0 xl:grid xl:grid-cols-4 xl:gap-5 xl:overflow-visible xl:px-0 xl:pb-0"
         >
           {personas.map((p, i) => (
             <li
               key={p.role}
-              className="group relative min-h-[460px] w-[80%] shrink-0 snap-start overflow-hidden rounded-[20px] shadow-[0_1px_0_rgba(25,25,24,.04),0_20px_44px_-28px_rgba(25,25,24,.35)] sm:w-[46%] lg:aspect-[3/4] lg:min-h-0 lg:w-auto"
+              className="group relative min-h-[460px] w-[80%] shrink-0 snap-start overflow-hidden rounded-[20px] shadow-[0_1px_0_rgba(25,25,24,.04),0_20px_44px_-28px_rgba(25,25,24,.35)] sm:w-[46%] lg:w-[31%] xl:aspect-[3/4] xl:min-h-0 xl:w-auto"
             >
               {/* PLACEHOLDER imagery — swap for one image per role. */}
               <Image
@@ -79,12 +80,26 @@ export function Audience() {
                 sizes="(min-width: 1024px) 25vw, 80vw"
                 className="object-cover transition-transform duration-700 ease-recall group-hover:scale-[1.04]"
               />
-              {/* Butter-paper overlay: white frost, translucent, inset from the edge. */}
-              <div className="absolute inset-3 flex flex-col justify-between rounded-[14px] border border-white/60 bg-white/[0.58] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,.7)] backdrop-blur-md backdrop-saturate-[1.1] lg:p-7">
-                <span className="text-[12px] font-medium tabular-nums tracking-[0.04em] text-ink/55">0{i + 1}</span>
+              {/* Butter-paper overlay: a light white frost, translucent, inset from the edge. */}
+              <div className="absolute inset-3 flex flex-col justify-between rounded-[14px] border border-white/45 bg-white/[0.34] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.55)] backdrop-blur-md backdrop-saturate-[1.1] lg:p-6">
+                <span className="text-[12px] font-medium tabular-nums tracking-[0.04em] text-ink/60">0{i + 1}</span>
                 <div>
-                  <h3 className="text-[30px] font-medium leading-[0.96] tracking-[-0.04em] text-ink">{p.role}</h3>
-                  <p className="mt-3 max-w-[240px] text-[14px] font-medium leading-[1.45] tracking-[-0.02em] text-ink/60">{p.saves}</p>
+                  <h3 className="flex items-center gap-1.5 whitespace-nowrap text-[22px] font-medium sm:text-[24px] leading-[1] tracking-[-0.04em] text-ink xl:text-[clamp(20px,1.6vw,28px)]">
+                    {p.role}
+                    <ArrowUpRight
+                      aria-hidden="true"
+                      strokeWidth={1.8}
+                      className="h-[0.8em] w-[0.8em] shrink-0 transition-transform duration-300 ease-recall group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
+                  </h3>
+                  {/* Revealed on hover (always shown where there is no hover). */}
+                  <div className="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-recall group-hover:grid-rows-[1fr] group-hover:opacity-100 group-focus-within:grid-rows-[1fr] group-focus-within:opacity-100 [@media(hover:none)]:grid-rows-[1fr] [@media(hover:none)]:opacity-100">
+                    <p className="overflow-hidden">
+                      <span className="block max-w-[240px] pt-3 text-[14px] font-medium leading-[1.45] tracking-[-0.02em] text-ink/65">
+                        {p.saves}
+                      </span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </li>
