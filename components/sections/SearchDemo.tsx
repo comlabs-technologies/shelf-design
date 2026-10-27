@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { CornerDownRight } from "lucide-react";
+import { CredibilityStrip } from "../CredibilityStrip";
 import { CurveDivider } from "../CurveDivider";
 import { FallingTags } from "../FallingTags";
 import { Eyebrow, SectionTitle } from "../ui/Eyebrow";
@@ -77,6 +78,10 @@ export function SearchDemo() {
       className="relative z-10 bg-sand pb-24 pt-14 sm:pb-32 sm:pt-20 lg:pb-40"
     >
       <FallingTags />
+
+      <div data-reveal className="mx-auto max-w-[1200px] px-5 pb-16 sm:px-8 sm:pb-24">
+        <CredibilityStrip />
+      </div>
 
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div className="lg:pt-10">

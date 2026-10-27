@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { EmailForm } from "../ui/EmailForm";
-import { SOURCES, SourceBadge } from "../ui/SourceBadge";
 import { DashboardMockup } from "./DashboardMockup";
 import { DESKTOP, NO_MOTION, setupGsap } from "@/lib/gsap";
 
@@ -31,7 +30,15 @@ export function Hero() {
           { scaleX: 0 },
           { scaleX: 1, duration: 0.42, transformOrigin: "0% 50%" },
           0.22,
-        );
+        )
+        // "ready" drops in letter by letter: -10px → -5px, then springs to rest.
+        .fromTo(
+          q("[data-letter]"),
+          { y: -10, opacity: 0 },
+          { y: -5, opacity: 1, duration: 0.16, ease: "power2.out", stagger: 0.06 },
+          0.3,
+        )
+        .to(q("[data-letter]"), { y: 0, duration: 0.6, ease: "elastic.out(1, 0.45)", stagger: 0.06 }, 0.46);
 
       // 2. The dashboard enters after the copy, once it is actually on screen.
       let copyDone = false;
@@ -119,7 +126,13 @@ export function Hero() {
                 aria-hidden="true"
                 className="absolute -inset-x-[0.08em] bottom-[0.02em] top-[0.14em] -z-10 -rotate-[0.6deg] rounded-[0.2em] bg-lime"
               />
-              ready
+              <span aria-label="ready">
+                {"ready".split("").map((ch, i) => (
+                  <span key={i} data-letter aria-hidden="true" className="inline-block">
+                    {ch}
+                  </span>
+                ))}
+              </span>
             </span>{" "}
             when you need it.
           </span>
@@ -145,28 +158,9 @@ export function Hero() {
           />
         </div>
 
-        <div
-          data-init
-          data-hero
-          className="mx-auto mt-6 flex max-w-[1080px] flex-col items-center gap-3 lg:mt-7 lg:flex-row lg:justify-center lg:gap-5"
-        >
-          <p className="shrink-0 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-            Built for people who save professionally
-          </p>
-          <ul
-            className="-mx-5 flex max-w-[calc(100%+40px)] gap-1.5 overflow-x-auto px-5 py-2 scrollbar-none [mask-image:linear-gradient(90deg,transparent,#000_20px,#000_calc(100%-20px),transparent)] lg:mx-0 lg:max-w-none lg:flex-wrap lg:justify-center lg:overflow-visible lg:p-0 lg:[mask-image:none]"
-            aria-label="Saves from"
-          >
-            {(["chrome", "safari", "ios", "slack", "notion", "figma", "linkedin", "x"] as const).map((k) => (
-              <li key={k} className="shrink-0">
-                <SourceBadge source={SOURCES[k]} className="h-7 px-2.5 text-[12.5px]" />
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
 
-      <div ref={stage} className="relative z-0 mx-auto mt-7 max-w-[1200px] px-4 sm:mt-8 sm:px-8">
+      <div ref={stage} className="relative z-0 mx-auto mt-10 max-w-[1200px] px-4 sm:mt-14 sm:px-8">
         <div ref={scrub}>
           <div ref={enter} data-init>
             <DashboardMockup play={play} />

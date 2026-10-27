@@ -9,6 +9,7 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
     "clsx": "^2.1.1",
     "framer-motion": "^14.6.0",
     "geist": "^1.8.2",

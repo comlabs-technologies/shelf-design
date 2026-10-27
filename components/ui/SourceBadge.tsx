@@ -1,48 +1,75 @@
 import clsx from "clsx";
 import {
+  siApple,
   siFigma,
   siGooglechrome,
-  siApple,
+  siInstagram,
+  siMedium,
   siNotion,
   siSafari,
+  siSpotify,
   siSubstack,
   siX,
   siYoutube,
 } from "simple-icons";
-import { Briefcase, FileText, Image as ImageIcon, MessageSquare, StickyNote, type LucideIcon } from "lucide-react";
+// Slack and LinkedIn marks: Font Awesome Free brands, CC BY 4.0 — https://fontawesome.com/license/free
+import { faLinkedin, faSlack, type IconDefinition } from "@fortawesome/free-brands-svg-icons";
+import { FileText, Image as ImageIcon, Mic, StickyNote, type LucideIcon } from "lucide-react";
 
-type Brand = { path: string };
+type Mark = { path: string; viewBox: string; hex: string };
 
 export type Source = {
   name: string;
-  brand?: Brand;
-  /** Neutral glyph for sources without a usable brand mark. */
+  mark?: Mark;
+  /** Neutral glyph for sources that aren't a brand (screenshots, notes…). */
   icon?: LucideIcon;
 };
 
-// Slack and LinkedIn marks aren't distributed by simple-icons at the brands'
-// request, so they use a neutral glyph alongside the name.
+const si = (icon: { path: string; hex: string }): Mark => ({ path: icon.path, viewBox: "0 0 24 24", hex: `#${icon.hex}` });
+const fa = (icon: IconDefinition, hex: string): Mark => {
+  const [w, h, , , d] = icon.icon;
+  return { path: Array.isArray(d) ? d.join(" ") : d, viewBox: `0 0 ${w} ${h}`, hex };
+};
+
 export const SOURCES = {
-  chrome: { name: "Chrome", brand: siGooglechrome },
-  safari: { name: "Safari", brand: siSafari },
-  ios: { name: "iOS", brand: siApple },
-  slack: { name: "Slack", icon: MessageSquare },
-  notion: { name: "Notion", brand: siNotion },
-  figma: { name: "Figma", brand: siFigma },
-  linkedin: { name: "LinkedIn", icon: Briefcase },
-  x: { name: "X", brand: siX },
-  youtube: { name: "YouTube", brand: siYoutube },
-  substack: { name: "Newsletters", brand: siSubstack },
+  chrome: { name: "Chrome", mark: si(siGooglechrome) },
+  safari: { name: "Safari", mark: si(siSafari) },
+  ios: { name: "iOS", mark: si(siApple) },
+  slack: { name: "Slack", mark: fa(faSlack, "#4A154B") },
+  notion: { name: "Notion", mark: si(siNotion) },
+  figma: { name: "Figma", mark: si(siFigma) },
+  linkedin: { name: "LinkedIn", mark: fa(faLinkedin, "#0A66C2") },
+  x: { name: "X", mark: si(siX) },
+  youtube: { name: "YouTube", mark: si(siYoutube) },
+  instagram: { name: "Instagram", mark: si(siInstagram) },
+  spotify: { name: "Spotify", mark: si(siSpotify) },
+  medium: { name: "Medium", mark: si(siMedium) },
+  substack: { name: "Newsletters", mark: si(siSubstack) },
   screenshots: { name: "Screenshots", icon: ImageIcon },
   notes: { name: "Notes", icon: StickyNote },
   pdf: { name: "PDFs", icon: FileText },
+  voice: { name: "Voice notes", icon: Mic },
 } satisfies Record<string, Source>;
 
-export function SourceGlyph({ source, className }: { source: Source; className?: string }) {
-  if (source.brand)
+/** Brand mark (monochrome by default, or in its brand colour) or a neutral glyph. */
+export function SourceGlyph({
+  source,
+  className,
+  colored = false,
+}: {
+  source: Source;
+  className?: string;
+  colored?: boolean;
+}) {
+  if (source.mark)
     return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className={clsx("h-3.5 w-3.5 shrink-0", className)} fill="currentColor">
-        <path d={source.brand.path} />
+      <svg
+        viewBox={source.mark.viewBox}
+        aria-hidden="true"
+        className={clsx("h-3.5 w-3.5 shrink-0", className)}
+        fill={colored ? source.mark.hex : "currentColor"}
+      >
+        <path d={source.mark.path} />
       </svg>
     );
   const Icon = source.icon!;

@@ -2,29 +2,13 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import {
-  AtSign,
-  Briefcase,
-  Camera,
-  CirclePlay,
-  FileText,
-  Globe,
-  Headphones,
-  Image as ImageIcon,
-  Mail,
-  MessageSquare,
-  Mic,
-  Newspaper,
-  PenTool,
-  StickyNote,
-  type LucideIcon,
-} from "lucide-react";
+import { SOURCES, SourceGlyph, type Source } from "./ui/SourceBadge";
 import { CurveDivider, DOME } from "./CurveDivider";
 import { NO_MOTION, setupGsap } from "@/lib/gsap";
 
 type Tag = {
   label: string;
-  icon: LucideIcon;
+  source: Source;
   /** Resting position along the dome, 0–1 of its width. */
   x: number;
   /** Extra tilt relative to the surface, in degrees. */
@@ -38,20 +22,20 @@ type Tag = {
 };
 
 const tags: Tag[] = [
-  { label: "Voice note", icon: Mic, x: 0.03, cx: 0.02, tilt: -66, compact: true },
-  { label: "Web page", icon: Globe, x: 0.085, cx: 0.16, tilt: -8, compact: true },
-  { label: "Screenshot", icon: ImageIcon, x: 0.125, tilt: -22, level: 1 },
-  { label: "Figma file", icon: PenTool, x: 0.165, tilt: 7 },
-  { label: "PDF", icon: FileText, x: 0.232, cx: 0.36, tilt: -5, compact: true },
-  { label: "Instagram post", icon: Camera, x: 0.3, tilt: 4 },
-  { label: "LinkedIn post", icon: Briefcase, x: 0.275, tilt: -12, level: 1 },
-  { label: "Slack thread", icon: MessageSquare, x: 0.395, tilt: 3 },
-  { label: "X thread", icon: AtSign, x: 0.62, tilt: -4 },
-  { label: "Note", icon: StickyNote, x: 0.685, cx: 0.6, tilt: 12, compact: true },
-  { label: "Article", icon: Newspaper, x: 0.75, cx: 0.7, tilt: -6, level: 0, compact: true, clevel: 1 },
-  { label: "Podcast clip", icon: Headphones, x: 0.795, tilt: 16, level: 1 },
-  { label: "YouTube video", icon: CirclePlay, x: 0.85, cx: 0.8, tilt: -3, compact: true },
-  { label: "Newsletter", icon: Mail, x: 0.965, cx: 0.975, tilt: 64, compact: true },
+  { label: "Voice note", source: SOURCES.voice, x: 0.03, cx: 0.02, tilt: -66, compact: true },
+  { label: "Web page", source: SOURCES.chrome, x: 0.085, cx: 0.16, tilt: -8, compact: true },
+  { label: "Screenshot", source: SOURCES.screenshots, x: 0.125, tilt: -22, level: 1 },
+  { label: "Figma file", source: SOURCES.figma, x: 0.165, tilt: 7 },
+  { label: "PDF", source: SOURCES.pdf, x: 0.232, cx: 0.34, tilt: -5, compact: true },
+  { label: "Instagram post", source: SOURCES.instagram, x: 0.312, tilt: 4 },
+  { label: "LinkedIn post", source: SOURCES.linkedin, x: 0.275, tilt: -12, level: 1 },
+  { label: "Slack thread", source: SOURCES.slack, x: 0.415, tilt: 3 },
+  { label: "X thread", source: SOURCES.x, x: 0.585, tilt: -4 },
+  { label: "Notion page", source: SOURCES.notion, x: 0.665, cx: 0.55, tilt: 6, compact: true },
+  { label: "Medium article", source: SOURCES.medium, x: 0.765, cx: 0.7, tilt: -6, level: 0, compact: true, clevel: 1 },
+  { label: "Podcast clip", source: SOURCES.spotify, x: 0.815, tilt: 16, level: 1 },
+  { label: "YouTube video", source: SOURCES.youtube, x: 0.875, cx: 0.85, tilt: -3, compact: true },
+  { label: "Newsletter", source: SOURCES.substack, x: 0.965, cx: 0.975, tilt: 64, compact: true },
 ];
 
 type Pose = { x: number; y: number; rot: number };
@@ -198,7 +182,7 @@ export function FallingTags() {
               }}
             >
               <span className="tag-lift pointer-events-auto flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full bg-surface px-3 text-[12px] font-medium tracking-[-0.01em] text-ink/80 sm:h-11 sm:gap-2 sm:px-4 sm:text-[14.5px]">
-                <tag.icon className="h-3.5 w-3.5 text-muted-strong sm:h-4 sm:w-4" strokeWidth={1.8} />
+                <SourceGlyph source={tag.source} colored className="h-3.5 w-3.5 text-muted-strong sm:h-4 sm:w-4" />
                 {tag.label}
               </span>
             </div>

@@ -32,7 +32,7 @@ The email forms simulate submission client-side; connect `EmailForm`'s `submit` 
 
 - `components/sections/BetaVoices.tsx` holds **placeholder** social proof (`BETA_COUNT`, the two quotes and the founder note). Replace with real, attributable beta feedback — the count is reused in the final CTA.
 - The "~1 hr vs seconds" comparison in the Why Recall section is illustrative; swap in a measured figure when you have one.
-- Source logos come from `simple-icons`. Slack and LinkedIn aren't distributed there at the brands' request, so they use neutral glyphs.
+- Source logos come from `simple-icons` (CC0). Slack and LinkedIn aren't distributed there, so those two marks come from Font Awesome Free brands, which is licensed CC BY 4.0 — keep the attribution comment in `components/ui/SourceBadge.tsx`.
 
 ## Shadow system
 
