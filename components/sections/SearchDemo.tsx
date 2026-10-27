@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CornerDownRight } from "lucide-react";
 import { CredibilityStrip } from "../CredibilityStrip";
-import { CurveDivider } from "../CurveDivider";
 import { FallingTags } from "../FallingTags";
 import { Eyebrow, SectionTitle } from "../ui/Eyebrow";
 import { SearchField } from "../ui/SearchField";
@@ -75,9 +74,8 @@ export function SearchDemo() {
     <section
       id="search"
       aria-labelledby="search-title"
-      className="relative z-10 bg-sand pb-32 pt-14 sm:pb-44 sm:pt-20 lg:pb-56"
+      className="relative z-10 bg-sand pb-[170px] pt-14 sm:pb-[250px] sm:pt-20 lg:pb-[330px]"
     >
-      <CurveDivider shape="dome" className="bottom-[calc(100%-1px)]" />
 
       <div data-reveal className="mx-auto max-w-[1600px] px-5 pb-16 sm:px-8 xl:px-12 sm:pb-24">
         <CredibilityStrip />
@@ -167,8 +165,8 @@ export function SearchDemo() {
         </div>
       </div>
 
-      {/* Everything you saved lands here: tags drop onto the curved floor. */}
-      <FallingTags shape="bowl" />
+      {/* Everything you saved lands here: tags drop onto the floor. */}
+      <FallingTags shape="valley" />
     </section>
   );
 }

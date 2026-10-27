@@ -39,7 +39,16 @@ const tags: Tag[] = [
 ];
 
 type Pose = { x: number; y: number; rot: number };
-type Shape = "dome" | "bowl";
+type Shape = "dome" | "bowl" | "valley";
+
+// An invisible V-shaped floor: near-straight sides falling from both top
+// corners to a softly rounded low point in the middle.
+const VALLEY = [
+  [0, 0],
+  [620, 160],
+  [820, 160],
+  [1440, 0],
+] as const;
 
 const bez = (a: number, b: number, c: number, d: number, t: number) =>
   (1 - t) ** 3 * a + 3 * (1 - t) ** 2 * t * b + 3 * (1 - t) * t ** 2 * c + t ** 3 * d;
@@ -48,7 +57,7 @@ const bezD = (a: number, b: number, c: number, d: number, t: number) =>
 
 /** Point and tangent on the curve at horizontal fraction `fx`, in pixels. */
 function onCurve(shape: Shape, fx: number, w: number, h: number) {
-  const [p0, p1, p2, p3] = CURVES[shape];
+  const [p0, p1, p2, p3] = shape === "valley" ? VALLEY : CURVES[shape];
   const target = fx * 1440;
   let lo = 0;
   let hi = 1;
@@ -133,7 +142,7 @@ export function FallingTags({ shape = "dome" }: { shape?: Shape }) {
         .filter(({ tag }) => !compact || tag.compact)
         .sort((a, b) => (a.tag.level ?? 0) - (b.tag.level ?? 0));
       // Bowl: drop through the open space above the floor, not across the copy.
-      const fall = shape === "bowl" ? 220 : Math.min(window.innerHeight * 0.8, 720);
+      const fall = shape !== "dome" ? 220 : Math.min(window.innerHeight * 0.8, 720);
 
       ScrollTrigger.create({
         trigger: wrap.current,
@@ -164,11 +173,13 @@ export function FallingTags({ shape = "dome" }: { shape?: Shape }) {
       ref={wrap}
       aria-hidden="true"
       className={clsx(
-        "pointer-events-none absolute inset-x-0 h-[44px] overflow-x-clip sm:h-[80px] lg:h-[120px]",
-        shape === "dome" ? "bottom-[calc(100%-1px)]" : "top-[calc(100%-1px)]",
+        "pointer-events-none absolute inset-x-0 overflow-x-clip",
+        shape === "valley" ? "bottom-0 h-[110px] sm:h-[170px] lg:h-[240px]" : "h-[44px] sm:h-[80px] lg:h-[120px]",
+        shape === "dome" && "bottom-[calc(100%-1px)]",
+        shape === "bowl" && "top-[calc(100%-1px)]",
       )}
     >
-      <CurveDivider shape={shape} className="inset-y-0" />
+      {shape !== "valley" && <CurveDivider shape={shape} className="inset-y-0" />}
       {tags.map((tag, i) => (
         <div
           key={tag.label}
