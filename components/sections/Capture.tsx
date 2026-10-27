@@ -87,7 +87,7 @@ function SavePopover({ step }: { step: number }) {
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.32, ease }}
           style={{ transformOrigin: "90% 0%" }}
-          className="absolute right-3 top-[50px] z-20 w-[284px] overflow-hidden rounded-[14px] border border-white/30 bg-white/[0.16] text-white shadow-[0_24px_60px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.3)] backdrop-blur-2xl backdrop-saturate-150"
+          className="absolute right-3 top-[50px] z-20 w-[284px] overflow-hidden rounded-[14px] border border-white/40 bg-white/[0.32] text-white shadow-[0_24px_60px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.3)] backdrop-blur-2xl backdrop-saturate-150"
         >
           <div className="flex items-center justify-between border-b border-white/15 px-3.5 py-2.5">
             <span className="flex items-center gap-2 text-[12.5px] font-medium">
@@ -160,7 +160,7 @@ function PhoneShare({ show }: { show: boolean }) {
       initial={false}
       animate={{ opacity: show ? 1 : 0, y: show ? 0 : 28 }}
       transition={{ duration: 0.4, ease }}
-      className="absolute bottom-0 left-0 z-20 h-[250px] w-[150px] overflow-hidden rounded-[30px] border border-white/30 bg-white/10 p-1.5 shadow-[0_24px_60px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.3)] backdrop-blur-2xl backdrop-saturate-150"
+      className="absolute bottom-0 left-0 z-20 h-[250px] w-[150px] overflow-hidden rounded-[30px] border border-white/35 bg-white/[0.18] p-1.5 shadow-[0_24px_60px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.3)] backdrop-blur-2xl backdrop-saturate-150"
     >
       <div className="relative h-full overflow-hidden rounded-[24px] border border-white/15 bg-white/[0.08]">
         <div className="mx-auto mt-2 h-3.5 w-12 rounded-full bg-black/70" />
@@ -169,7 +169,7 @@ function PhoneShare({ show }: { show: boolean }) {
           <div className="h-1 w-full rounded bg-white/25" />
           <div className="h-1 w-5/6 rounded bg-white/25" />
         </div>
-        <div className="absolute inset-x-0 bottom-0 rounded-t-[18px] border-t border-white/25 bg-white/20 px-2.5 pb-3 pt-2 text-white backdrop-blur-xl">
+        <div className="absolute inset-x-0 bottom-0 rounded-t-[18px] border-t border-white/30 bg-white/[0.3] px-2.5 pb-3 pt-2 text-white backdrop-blur-xl">
           <div className="mx-auto mb-2 h-1 w-7 rounded-full bg-white/50" />
           <p className="mb-2 text-[8.5px] font-medium text-white/80">Share</p>
           <div className="flex justify-between">
@@ -195,9 +195,9 @@ function PhoneShare({ show }: { show: boolean }) {
 function CaptureStage({ step }: { step: number }) {
   return (
     <ScaledStage width={640} height={500} className="mx-auto max-w-[640px]">
-      <div className="absolute bottom-10 left-12 right-0 top-0 overflow-hidden rounded-2xl border border-white/25 bg-white/[0.1] text-white shadow-[0_30px_80px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.28)] backdrop-blur-2xl backdrop-saturate-150">
+      <div className="absolute bottom-10 left-12 right-0 top-0 overflow-hidden rounded-2xl border border-white/30 bg-white/[0.17] text-white shadow-[0_30px_80px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.28)] backdrop-blur-2xl backdrop-saturate-150">
         {/* chrome */}
-        <div className="flex h-12 items-center gap-2.5 border-b border-white/15 bg-white/[0.06] px-4">
+        <div className="flex h-12 items-center gap-2.5 border-b border-white/20 bg-white/[0.1] px-4">
           <div className="mr-1 flex gap-1.5">
             {[0, 1, 2].map((i) => (
               <span key={i} className="h-2.5 w-2.5 rounded-full bg-white/35" />
