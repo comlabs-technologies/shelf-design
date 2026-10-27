@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Lock, RotateCw } from "lucide-react";
@@ -27,6 +28,29 @@ const steps = [
     body: "One line of why. Recall keeps it with the item, and that line is what you'll search by months from now.",
   },
 ];
+
+// One backdrop per step; they crossfade as the story advances.
+const backdrops = ["/capture/step-1.png", "/capture/step-2.png", "/capture/step-3.png"];
+
+function Backdrop({ step, only }: { step: number; only?: boolean }) {
+  return (
+    <div aria-hidden="true" className="absolute inset-0">
+      {backdrops.map((src, i) =>
+        only && i !== step ? null : (
+          <motion.div
+            key={src}
+            className="absolute inset-0"
+            initial={false}
+            animate={{ opacity: i === step ? 1 : 0, scale: i === step ? 1 : 1.04 }}
+            transition={{ duration: 0.7, ease }}
+          >
+            <Image src={src} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" className="object-cover" />
+          </motion.div>
+        ),
+      )}
+    </div>
+  );
+}
 
 const REASON = "Usage-first story for slide 9 of the investor deck";
 
@@ -348,9 +372,12 @@ export function Capture() {
             </div>
           </div>
 
-          {/* The stage sits on a warm surface, like a product on a table. */}
-          <div className="hidden rounded-[28px] bg-sand px-10 pb-12 pt-14 lg:block">
-            <CaptureStage step={step} />
+          {/* Each step has its own backdrop behind the stage; they crossfade on scroll. */}
+          <div className="relative hidden overflow-hidden rounded-[28px] bg-[#0B1E5B] px-10 pb-12 pt-14 lg:block">
+            <Backdrop step={step} />
+            <div className="relative">
+              <CaptureStage step={step} />
+            </div>
           </div>
 
           {/* Below desktop: each step with its own frame */}
@@ -360,8 +387,11 @@ export function Capture() {
                 <span className="text-[12px] font-medium tabular-nums tracking-[0.04em] text-muted">0{i + 1}</span>
                 <h3 className="mt-3 text-[26px] font-medium leading-[1.08] tracking-[-0.04em]">{s.title}</h3>
                 <p className="mt-3 max-w-[460px] text-[15.5px] leading-[1.55] text-muted">{s.body}</p>
-                <div className="mt-8 rounded-[24px] bg-sand px-4 pb-6 pt-8 sm:px-8" aria-hidden="true">
-                  <CaptureStage step={i} />
+                <div className="relative mt-8 overflow-hidden rounded-[24px] bg-[#0B1E5B] px-4 pb-6 pt-8 sm:px-8" aria-hidden="true">
+                  <Backdrop step={i} only />
+                  <div className="relative">
+                    <CaptureStage step={i} />
+                  </div>
                 </div>
               </li>
             ))}
