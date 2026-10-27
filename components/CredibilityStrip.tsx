@@ -4,8 +4,18 @@ import { SOURCES, type Source } from "./ui/SourceBadge";
 
 const keys = ["chrome", "safari", "ios", "slack", "notion", "figma", "linkedin", "x"] as const;
 
-/** Brand mark knocked out in white on a circle of the brand colour. */
+/** Full-colour logo on a white disc, or the mark knocked out on its brand colour. */
 function MarkDot({ source }: { source: Source }) {
+  if (source.logo)
+    return (
+      <span
+        aria-hidden="true"
+        className="grid h-[1.15em] w-[1.15em] shrink-0 place-items-center rounded-full bg-surface shadow-[0_1px_2px_rgba(25,25,24,.12)]"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={source.logo} alt="" className="h-[0.66em] w-[0.66em]" />
+      </span>
+    );
   const m = source.mark!;
   return (
     <span

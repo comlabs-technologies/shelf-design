@@ -1,17 +1,16 @@
 import clsx from "clsx";
 
+/** 11px medium uppercase label — the small voice above every heading. */
 export function Eyebrow({ className, ...rest }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={clsx(
-        "font-mono text-[11.5px] font-medium uppercase tracking-[0.14em] text-muted-strong",
-        className,
-      )}
+      className={clsx("text-[11px] font-medium uppercase tracking-[0.14em] text-muted", className)}
       {...rest}
     />
   );
 }
 
+/** Section display heading: medium weight, tight tracking, never bold. */
 export function SectionTitle({
   className,
   as: Tag = "h2",
@@ -20,7 +19,7 @@ export function SectionTitle({
   return (
     <Tag
       className={clsx(
-        "text-balance text-[34px] font-semibold leading-[1.04] tracking-[-0.045em] text-ink sm:text-[44px] lg:text-[52px]",
+        "text-balance text-[38px] font-medium leading-[0.98] tracking-[-0.05em] text-ink sm:text-[52px] lg:text-[64px]",
         className,
       )}
       {...rest}

@@ -74,7 +74,12 @@ function AppTile({ source }: { source: Source }) {
       title={source.name}
       className="grid aspect-square w-full place-items-center rounded-[16px] border border-[rgba(25,25,24,.07)] bg-surface text-ink shadow-[0_2px_7px_rgba(25,25,24,.06)]"
     >
-      <Mark source={source} className="h-[38%] w-[38%]" />
+      {source.logo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={source.logo} alt="" className="h-[42%] w-[42%]" />
+      ) : (
+        <Mark source={source} className="h-[38%] w-[38%]" />
+      )}
     </span>
   );
 }

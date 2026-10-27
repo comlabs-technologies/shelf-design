@@ -3,7 +3,6 @@ import { Hero } from "@/components/hero/Hero";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Audience } from "@/components/sections/Audience";
 import { BetaVoices } from "@/components/sections/BetaVoices";
-import { Ecosystem } from "@/components/sections/Ecosystem";
 import { Capabilities } from "@/components/sections/Capabilities";
 import { Capture } from "@/components/sections/Capture";
 import { Faq } from "@/components/sections/Faq";
@@ -27,7 +26,6 @@ export default function Page() {
         <Hero />
         <SearchDemo />
         <Capture />
-        <Ecosystem />
         <Capabilities />
         <Audience />
         <BetaVoices />

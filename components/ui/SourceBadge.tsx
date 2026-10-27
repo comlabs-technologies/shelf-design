@@ -21,6 +21,8 @@ type Mark = { path: string; viewBox: string; hex: string };
 export type Source = {
   name: string;
   mark?: Mark;
+  /** Full-colour logo (devicon, MIT) served from /public/icons. */
+  logo?: string;
   /** Neutral glyph for sources that aren't a brand (screenshots, notes…). */
   icon?: LucideIcon;
 };
@@ -32,13 +34,13 @@ const fa = (icon: IconDefinition, hex: string): Mark => {
 };
 
 export const SOURCES = {
-  chrome: { name: "Chrome", mark: si(siGooglechrome) },
-  safari: { name: "Safari", mark: si(siSafari) },
-  ios: { name: "iOS", mark: si(siApple) },
-  slack: { name: "Slack", mark: fa(faSlack, "#4A154B") },
-  notion: { name: "Notion", mark: si(siNotion) },
-  figma: { name: "Figma", mark: si(siFigma) },
-  linkedin: { name: "LinkedIn", mark: fa(faLinkedin, "#0A66C2") },
+  chrome: { name: "Chrome", mark: si(siGooglechrome), logo: "/icons/chrome.svg" },
+  safari: { name: "Safari", mark: si(siSafari), logo: "/icons/safari.svg" },
+  ios: { name: "iOS", mark: si(siApple), logo: "/icons/apple.svg" },
+  slack: { name: "Slack", mark: fa(faSlack, "#4A154B"), logo: "/icons/slack.svg" },
+  notion: { name: "Notion", mark: si(siNotion), logo: "/icons/notion.svg" },
+  figma: { name: "Figma", mark: si(siFigma), logo: "/icons/figma.svg" },
+  linkedin: { name: "LinkedIn", mark: fa(faLinkedin, "#0A66C2"), logo: "/icons/linkedin.svg" },
   x: { name: "X", mark: si(siX) },
   youtube: { name: "YouTube", mark: si(siYoutube) },
   instagram: { name: "Instagram", mark: si(siInstagram) },

@@ -36,35 +36,34 @@ export function Faq() {
   const t = { duration: reduce ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
-    <section id="faq" aria-labelledby="faq-title" className="py-24 sm:py-36">
-      <div className="mx-auto max-w-[880px] px-5 sm:px-8">
-        <div className="text-center">
+    <section id="faq" aria-labelledby="faq-title" className="pb-32 sm:pb-44">
+      <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24 xl:px-12">
+        <div className="lg:sticky lg:top-32 lg:self-start">
           <Eyebrow data-reveal>Before you join</Eyebrow>
-          <SectionTitle id="faq-title" data-reveal className="mt-4">
+          <SectionTitle id="faq-title" data-reveal className="mt-5 max-w-[420px]">
             Questions worth asking.
           </SectionTitle>
+          <p data-reveal className="mt-7 max-w-[340px] text-[15px] font-medium leading-[1.5] tracking-[-0.02em] text-muted">
+            Something we didn&rsquo;t cover?{" "}
+            <a href="mailto:hello@recall.example" className="text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink">
+              Write to us
+            </a>{" "}
+            — a person replies.
+          </p>
         </div>
 
-        <div data-reveal className="mt-14 space-y-2.5">
+        <div data-reveal className="border-t border-line">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             const btn = `${base}-q${i}`;
             const panel = `${base}-a${i}`;
             return (
-              <div
-                key={f.q}
-                className={clsx(
-                  "relative overflow-hidden rounded-[16px] border bg-paper transition-[transform,box-shadow,border-color,background-color] duration-200 ease-recall",
-                  isOpen
-                    ? "border-line-strong/70 bg-surface"
-                    : "border-line hover:-translate-y-px hover:border-line-strong/80 hover:shadow-[0_7px_18px_rgba(25,25,24,.06)] motion-reduce:hover:translate-y-0",
-                )}
-              >
-                {/* Thin lime indicator marks the open row instead of a heavy shadow. */}
+              <div key={f.q} className="relative border-b border-line">
+                {/* Thin lime indicator marks the open row. */}
                 <span
                   aria-hidden="true"
                   className={clsx(
-                    "absolute bottom-5 left-0 top-5 w-[3px] rounded-r-full bg-lime transition-opacity duration-200",
+                    "absolute -left-5 bottom-7 top-7 w-[2px] rounded-full bg-lime transition-opacity duration-200 sm:-left-6",
                     isOpen ? "opacity-100" : "opacity-0",
                   )}
                 />
@@ -75,18 +74,27 @@ export function Faq() {
                     aria-expanded={isOpen}
                     aria-controls={panel}
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="group flex w-full items-center justify-between gap-6 rounded-[16px] px-5 py-5 text-left sm:px-7 sm:py-6"
+                    className="group flex w-full items-center justify-between gap-8 py-7 text-left"
                   >
-                    <span className="text-[17px] font-medium tracking-[-0.025em] text-ink sm:text-[20px]">{f.q}</span>
                     <span
                       className={clsx(
-                        "grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-colors duration-200",
-                        isOpen ? "border-ink bg-ink text-paper" : "border-line bg-surface text-ink group-hover:border-line-strong",
+                        "text-[19px] font-medium leading-[1.2] tracking-[-0.03em] transition-colors duration-200 sm:text-[24px]",
+                        isOpen ? "text-ink" : "text-ink/75 group-hover:text-ink",
+                      )}
+                    >
+                      {f.q}
+                    </span>
+                    <span
+                      className={clsx(
+                        "grid h-10 w-10 shrink-0 place-items-center rounded-full border transition-[background-color,border-color,box-shadow] duration-200",
+                        isOpen
+                          ? "border-ink bg-ink text-paper"
+                          : "border-line bg-surface text-ink group-hover:border-line-strong group-hover:shadow-[0_6px_14px_rgba(25,25,24,.08)]",
                       )}
                       aria-hidden="true"
                     >
                       <motion.span animate={{ rotate: isOpen ? 45 : 0 }} transition={t} className="grid">
-                        <Plus className="h-4 w-4" strokeWidth={2} />
+                        <Plus className="h-4 w-4" strokeWidth={1.8} />
                       </motion.span>
                     </span>
                   </button>
@@ -103,7 +111,7 @@ export function Faq() {
                       transition={t}
                       className="overflow-hidden"
                     >
-                      <p className="max-w-[680px] px-5 pb-6 pr-14 text-[16px] leading-[1.65] text-muted-strong sm:px-7 sm:pb-7">{f.a}</p>
+                      <p className="max-w-[640px] pb-8 pr-16 text-[16px] font-medium leading-[1.6] tracking-[-0.015em] text-muted">{f.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

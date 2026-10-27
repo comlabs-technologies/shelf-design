@@ -32,7 +32,7 @@ html {
 
 body {
   @apply bg-paper font-sans text-ink antialiased;
-  font-feature-settings: "ss01", "cv11";
+  font-feature-settings: "cv11", "ss03";
   text-rendering: optimizeLegibility;
   overflow-x: clip;
 }

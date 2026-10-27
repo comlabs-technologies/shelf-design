@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Lock, RotateCw } from "lucide-react";
 import { Eyebrow, SectionTitle } from "../ui/Eyebrow";
 import { LogoMark } from "../ui/Logo";
+import { SOURCES } from "../ui/SourceBadge";
 import { ScaledStage } from "../ui/ScaledStage";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { setupGsap } from "@/lib/gsap";
@@ -169,7 +170,7 @@ function PhoneShare({ show }: { show: boolean }) {
 
 function CaptureStage({ step }: { step: number }) {
   return (
-    <ScaledStage width={640} height={500}>
+    <ScaledStage width={640} height={500} className="mx-auto max-w-[640px]">
       <div className="absolute bottom-10 left-12 right-0 top-0 overflow-hidden rounded-2xl border border-line bg-surface shadow-mock">
         {/* chrome */}
         <div className="flex h-12 items-center gap-2.5 border-b border-line bg-[#FCFCFA] px-4">
@@ -280,21 +281,21 @@ export function Capture() {
   };
 
   return (
-    <section id="capture" ref={section} aria-labelledby="capture-title" className="relative pt-28 sm:pt-36 lg:h-[320vh] lg:pt-0">
+    <section id="capture" ref={section} aria-labelledby="capture-title" className="relative pt-32 sm:pt-44 lg:h-[320vh] lg:pt-0">
       <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center">
-        <div className="mx-auto grid w-full max-w-[1600px] grid-cols-1 gap-12 px-5 sm:px-8 xl:px-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-16 lg:pt-16">
+        <div className="mx-auto grid w-full max-w-[1600px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-20 lg:pt-20 xl:px-12">
           <div>
             <Eyebrow data-reveal>Capture without breaking flow</Eyebrow>
-            <SectionTitle id="capture-title" data-reveal className="mt-4 max-w-[440px]">
+            <SectionTitle id="capture-title" data-reveal className="mt-5 max-w-[480px]">
               Save it where the thought happens.
             </SectionTitle>
 
-            {/* Desktop: scroll-driven step list */}
-            <ol className="relative mt-10 hidden lg:block">
-              <span className="absolute bottom-2 left-[11px] top-2 w-[2px] rounded-full bg-line" aria-hidden="true" />
+            {/* Desktop: scroll-driven step index */}
+            <ol className="relative mt-14 hidden lg:block">
+              <span className="absolute bottom-0 left-0 top-0 w-px bg-ink/10" aria-hidden="true" />
               <span
                 ref={fill}
-                className="absolute bottom-2 left-[11px] top-2 w-[2px] origin-top scale-y-0 rounded-full bg-lime"
+                className="absolute bottom-0 left-0 top-0 w-px origin-top scale-y-0 bg-ink"
                 aria-hidden="true"
               />
               {steps.map((s, i) => (
@@ -303,21 +304,21 @@ export function Capture() {
                     type="button"
                     onClick={() => goTo(i)}
                     aria-current={step === i ? "step" : undefined}
-                    className="group relative flex w-full gap-5 rounded-card py-4 text-left"
+                    className="group flex w-full gap-6 py-4 pl-7 text-left"
                   >
                     <span
                       className={clsx(
-                        "relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-full border font-mono text-[10.5px] transition-colors duration-300",
-                        step >= i ? "border-ink bg-ink text-paper" : "border-line-strong bg-paper text-muted",
+                        "pt-[7px] text-[12px] font-medium tabular-nums tracking-[0.04em] transition-colors duration-300",
+                        step === i ? "text-ink" : "text-ink/25",
                       )}
                     >
-                      {i + 1}
+                      0{i + 1}
                     </span>
                     <span>
                       <span
                         className={clsx(
-                          "block text-[19px] font-semibold tracking-[-0.03em] transition-colors duration-300",
-                          step === i ? "text-ink" : "text-muted group-hover:text-muted-strong",
+                          "block text-[26px] font-medium leading-[1.08] tracking-[-0.04em] transition-colors duration-300",
+                          step === i ? "text-ink" : "text-ink/25 group-hover:text-ink/45",
                         )}
                       >
                         {s.title}
@@ -328,33 +329,38 @@ export function Capture() {
                         transition={{ duration: 0.32, ease }}
                         className="block overflow-hidden"
                       >
-                        <span className="block max-w-[380px] pt-2 text-[15px] leading-[1.55] text-muted">{s.body}</span>
+                        <span className="block max-w-[380px] pt-3 text-[15.5px] leading-[1.55] text-muted">{s.body}</span>
                       </motion.span>
                     </span>
                   </button>
                 </li>
               ))}
             </ol>
-            <p className="mt-8 hidden font-mono text-[11px] uppercase tracking-[0.12em] text-muted lg:block">
-              Chrome · Arc · Safari · Firefox · iOS · Android
-            </p>
+
+            <div className="mt-12 hidden items-center gap-4 lg:flex">
+              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">Works where you save</span>
+              <span className="flex items-center gap-2.5" aria-label="Chrome, Safari, iOS, Slack, Notion and Figma">
+                {(["chrome", "safari", "ios", "slack", "notion", "figma"] as const).map((k) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={k} src={SOURCES[k].logo} alt="" className="h-[18px] w-[18px]" />
+                ))}
+              </span>
+            </div>
           </div>
 
-          <div className="hidden lg:block">
+          {/* The stage sits on a warm surface, like a product on a table. */}
+          <div className="hidden rounded-[28px] bg-sand px-10 pb-12 pt-14 lg:block">
             <CaptureStage step={step} />
           </div>
 
           {/* Below desktop: each step with its own frame */}
-          <ol className="space-y-14 lg:hidden">
+          <ol className="space-y-20 lg:hidden">
             {steps.map((s, i) => (
               <li key={s.title} data-reveal>
-                <div className="flex items-center gap-3">
-                  <span className="grid h-6 w-6 place-items-center rounded-full bg-ink font-mono text-[10.5px] text-paper">{i + 1}</span>
-                  <span className="h-[2px] w-8 rounded-full bg-lime" aria-hidden="true" />
-                </div>
-                <h3 className="mt-4 text-[22px] font-semibold tracking-[-0.03em]">{s.title}</h3>
-                <p className="mt-2 max-w-[460px] text-[15.5px] leading-[1.55] text-muted">{s.body}</p>
-                <div className="mt-6" aria-hidden="true">
+                <span className="text-[12px] font-medium tabular-nums tracking-[0.04em] text-muted">0{i + 1}</span>
+                <h3 className="mt-3 text-[26px] font-medium leading-[1.08] tracking-[-0.04em]">{s.title}</h3>
+                <p className="mt-3 max-w-[460px] text-[15.5px] leading-[1.55] text-muted">{s.body}</p>
+                <div className="mt-8 rounded-[24px] bg-sand px-4 pb-6 pt-8 sm:px-8" aria-hidden="true">
                   <CaptureStage step={i} />
                 </div>
               </li>

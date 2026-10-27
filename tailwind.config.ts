@@ -16,7 +16,7 @@ const config: Config = {
         surface: "#FFFFFF",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "General Sans", "Inter", "system-ui", "sans-serif"],
+        sans: ["\"Inter Variable\"", "Inter", "General Sans", "system-ui", "sans-serif"],
         inter: ["\"Inter Variable\"", "Inter", "General Sans", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },

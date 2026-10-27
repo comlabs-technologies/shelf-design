@@ -1,14 +1,6 @@
-"use client";
-
-import { useState } from "react";
-import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
 import { CornerDownRight } from "lucide-react";
 import { Eyebrow, SectionTitle } from "../ui/Eyebrow";
-import { SearchField } from "../ui/SearchField";
 import { SourceChip, type SourceKind } from "../ui/SourceChip";
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 type Persona = {
   role: string;
@@ -57,92 +49,51 @@ const personas: Persona[] = [
 ];
 
 export function Audience() {
-  const [active, setActive] = useState(0);
-  const p = personas[active];
-
   return (
-    <section aria-labelledby="audience-title" className="pb-24 sm:pb-32">
+    <section aria-labelledby="audience-title" className="pb-32 sm:pb-44">
       <div className="mx-auto max-w-[1600px] px-5 sm:px-8 xl:px-12">
-        <Eyebrow data-reveal>Who it&rsquo;s for</Eyebrow>
-        <SectionTitle id="audience-title" data-reveal className="mt-4 max-w-[640px]">
-          For people whose work is made of references.
-        </SectionTitle>
-
-        <div data-reveal className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-          <div role="tablist" aria-label="Who Recall is for" className="flex gap-2 overflow-x-auto pb-1 scrollbar-none lg:flex-col lg:gap-0 lg:overflow-visible lg:border-t lg:border-line">
-            {personas.map((x, i) => (
-              <button
-                key={x.role}
-                id={`aud-tab-${i}`}
-                type="button"
-                role="tab"
-                aria-selected={active === i}
-                aria-controls="aud-panel"
-                onClick={() => setActive(i)}
-                className={clsx(
-                  "group shrink-0 text-left transition-colors duration-200",
-                  // mobile: pills · desktop: large editorial rows
-                  "rounded-full px-4 py-2 text-[14px] font-medium lg:rounded-none lg:border-b lg:border-line lg:px-0 lg:py-5 lg:text-[30px] lg:font-semibold lg:tracking-[-0.04em]",
-                  active === i
-                    ? "tag-lift bg-surface text-ink lg:!border-x-0 lg:!border-t-0 lg:!border-b-line lg:bg-transparent lg:!shadow-none"
-                    : "text-muted hover:text-ink",
-                )}
-              >
-                <span className="flex items-center justify-between gap-4">
-                  {x.role}
-                  <span
-                    aria-hidden="true"
-                    className={clsx(
-                      "hidden h-2 w-2 rounded-full transition-colors lg:block",
-                      active === i ? "bg-lime ring-4 ring-lime/25" : "bg-transparent",
-                    )}
-                  />
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div
-            id="aud-panel"
-            role="tabpanel"
-            aria-labelledby={`aud-tab-${active}`}
-            className="rounded-[20px] border border-line bg-sand p-4 sm:p-6"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.24, ease }}
-              >
-                <p className="px-1 text-[11px] font-medium uppercase tracking-[0.12em] text-muted">You save</p>
-                <p className="mt-1.5 px-1 text-[17px] leading-[1.5] tracking-[-0.015em] text-ink">{p.saves}</p>
-
-                <p className="mt-6 px-1 text-[11px] font-medium uppercase tracking-[0.12em] text-muted">Then you ask</p>
-                <SearchField value={p.ask} caret={false} className="mt-2 h-12" />
-
-                <ul className="mt-3 space-y-2">
-                  {p.results.map((r, i) => (
-                    <li
-                      key={r.title}
-                      className={clsx("rounded-card border bg-surface p-4", i === 0 ? "ui-focus border-line" : "border-line")}
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <p className="text-[14.5px] font-medium leading-snug tracking-[-0.015em]">{r.title}</p>
-                        <SourceChip kind={r.kind} label={r.source} className="shrink-0" />
-                      </div>
-                      <p className="mt-2 flex gap-1.5 text-[13px] leading-[1.45] text-muted-strong">
-                        <CornerDownRight className="mt-[2px] h-3.5 w-3.5 shrink-0 text-muted" strokeWidth={1.8} aria-hidden="true" />
-                        {r.why}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+        <div className="max-w-[720px]">
+          <Eyebrow data-reveal>Who it&rsquo;s for</Eyebrow>
+          <SectionTitle id="audience-title" data-reveal className="mt-5">
+            For people whose work is made of references.
+          </SectionTitle>
         </div>
+
+        <ul
+          data-reveal
+          className="-mx-5 mt-20 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 scrollbar-none sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0"
+        >
+          {personas.map((p, i) => {
+            const top = p.results[0];
+            return (
+              <li
+                key={p.role}
+                className="flex min-h-[460px] w-[80%] shrink-0 snap-start flex-col lg:aspect-[3/4] lg:min-h-0 rounded-[20px] border border-[rgba(25,25,24,.06)] bg-[#FCFCFA] p-6 shadow-[0_1px_0_rgba(25,25,24,.03),0_20px_44px_-30px_rgba(25,25,24,.28)] transition-[transform,box-shadow] duration-300 ease-recall hover:-translate-y-1 hover:shadow-[0_1px_0_rgba(25,25,24,.04),0_28px_56px_-28px_rgba(25,25,24,.32)] sm:w-[46%] lg:w-auto lg:p-7"
+              >
+                <span className="text-[12px] font-medium tabular-nums tracking-[0.04em] text-muted">0{i + 1}</span>
+                <h3 className="mt-3 text-[30px] font-medium leading-[0.96] tracking-[-0.04em]">{p.role}</h3>
+                <p className="mt-3 text-[14px] font-medium leading-[1.45] tracking-[-0.02em] text-muted">{p.saves}</p>
+
+                <div className="mt-auto">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted">They ask</p>
+                  <p className="mt-2 text-[17px] font-medium leading-[1.3] tracking-[-0.025em] text-ink">
+                    &ldquo;{p.ask}&rdquo;
+                  </p>
+                  <div className="mt-4 rounded-[14px] border border-line bg-surface p-3.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="line-clamp-2 text-[13px] font-medium leading-snug tracking-[-0.015em]">{top.title}</p>
+                      <SourceChip kind={top.kind} label={top.source} className="shrink-0" />
+                    </div>
+                    <p className="mt-2 flex gap-1.5 text-[12px] leading-[1.45] text-muted-strong">
+                      <CornerDownRight className="mt-[2px] h-3 w-3 shrink-0 text-muted" strokeWidth={1.8} aria-hidden="true" />
+                      <span className="line-clamp-2">{top.why}</span>
+                    </p>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
