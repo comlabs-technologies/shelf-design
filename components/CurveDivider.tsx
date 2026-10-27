@@ -1,12 +1,22 @@
 import clsx from "clsx";
 
-/** Dome control points in the 1440×120 viewBox, shared with the falling tags. */
-export const DOME = [
-  [0, 120],
-  [360, -8],
-  [1080, -8],
-  [1440, 120],
-] as const;
+type Curve = readonly (readonly [number, number])[];
+
+/** Arc control points in the 1440×120 viewBox, shared with the falling tags. */
+export const CURVES: Record<"dome" | "bowl", Curve> = {
+  dome: [
+    [0, 120],
+    [360, -8],
+    [1080, -8],
+    [1440, 120],
+  ],
+  bowl: [
+    [0, 0],
+    [360, 128],
+    [1080, 128],
+    [1440, 0],
+  ],
+};
 
 /**
  * A wide, gentle arc in the section's surface colour. `dome` rises into the
@@ -28,7 +38,7 @@ export function CurveDivider({
       preserveAspectRatio="none"
       className={clsx("pointer-events-none absolute inset-x-0 block h-[44px] w-full sm:h-[80px] lg:h-[120px]", className)}
     >
-      <path d={shape === "dome" ? `M${DOME[0]} C ${DOME[1]} ${DOME[2]} ${DOME[3]} Z` : "M0 0 C 360 128 1080 128 1440 0 Z"} fill={fill} />
+      <path d={`M${CURVES[shape][0]} C ${CURVES[shape][1]} ${CURVES[shape][2]} ${CURVES[shape][3]} Z`} fill={fill} />
     </svg>
   );
 }

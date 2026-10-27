@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { SOURCES, SourceGlyph, type Source } from "./ui/SourceBadge";
-import { CurveDivider, DOME } from "./CurveDivider";
+import { CURVES, CurveDivider } from "./CurveDivider";
 import { NO_MOTION, setupGsap } from "@/lib/gsap";
 
 type Tag = {
@@ -28,9 +28,9 @@ const tags: Tag[] = [
   { label: "Figma file", source: SOURCES.figma, x: 0.165, tilt: 7 },
   { label: "PDF", source: SOURCES.pdf, x: 0.232, cx: 0.34, tilt: -5, compact: true },
   { label: "Instagram post", source: SOURCES.instagram, x: 0.312, tilt: 4 },
-  { label: "LinkedIn post", source: SOURCES.linkedin, x: 0.275, tilt: -12, level: 1 },
-  { label: "Slack thread", source: SOURCES.slack, x: 0.415, tilt: 3 },
-  { label: "X thread", source: SOURCES.x, x: 0.585, tilt: -4 },
+  { label: "LinkedIn post", source: SOURCES.linkedin, x: 0.5, tilt: -3 },
+  { label: "Slack thread", source: SOURCES.slack, x: 0.405, tilt: 3 },
+  { label: "X thread", source: SOURCES.x, x: 0.592, tilt: -4 },
   { label: "Notion page", source: SOURCES.notion, x: 0.665, cx: 0.55, tilt: 6, compact: true },
   { label: "Medium article", source: SOURCES.medium, x: 0.765, cx: 0.7, tilt: -6, level: 0, compact: true, clevel: 1 },
   { label: "Podcast clip", source: SOURCES.spotify, x: 0.815, tilt: 16, level: 1 },
@@ -39,15 +39,16 @@ const tags: Tag[] = [
 ];
 
 type Pose = { x: number; y: number; rot: number };
+type Shape = "dome" | "bowl";
 
 const bez = (a: number, b: number, c: number, d: number, t: number) =>
   (1 - t) ** 3 * a + 3 * (1 - t) ** 2 * t * b + 3 * (1 - t) * t ** 2 * c + t ** 3 * d;
 const bezD = (a: number, b: number, c: number, d: number, t: number) =>
   3 * (1 - t) ** 2 * (b - a) + 6 * (1 - t) * t * (c - b) + 3 * t ** 2 * (d - c);
 
-/** Point and tangent on the dome at horizontal fraction `fx`, in pixels. */
-function onDome(fx: number, w: number, h: number) {
-  const [p0, p1, p2, p3] = DOME;
+/** Point and tangent on the curve at horizontal fraction `fx`, in pixels. */
+function onCurve(shape: Shape, fx: number, w: number, h: number) {
+  const [p0, p1, p2, p3] = CURVES[shape];
   const target = fx * 1440;
   let lo = 0;
   let hi = 1;
@@ -68,10 +69,11 @@ function onDome(fx: number, w: number, h: number) {
 }
 
 /**
- * The dome that rises over the hero dashboard, with a pile of saved-item
- * tags that drop onto it once — "everything you save lands in one place".
+ * A curved section edge with a pile of saved-item tags that drop onto it once —
+ * "everything you save lands in one place". As a bowl it is the floor of the
+ * section above; as a dome it rises into the section above.
  */
-export function FallingTags() {
+export function FallingTags({ shape = "dome" }: { shape?: Shape }) {
   const wrap = useRef<HTMLDivElement>(null);
   const outer = useRef<(HTMLDivElement | null)[]>([]);
   const inner = useRef<(HTMLDivElement | null)[]>([]);
@@ -96,7 +98,7 @@ export function FallingTags() {
         const tw = node.offsetWidth;
         const th = node.offsetHeight;
         const level = (isCompact ? tag.clevel : undefined) ?? tag.level ?? 0;
-        const p = onDome(isCompact ? (tag.cx ?? tag.x) : tag.x, w, h);
+        const p = onCurve(shape, isCompact ? (tag.cx ?? tag.x) : tag.x, w, h);
         const len = Math.hypot(p.dx, p.dy);
         const nx = p.dy / len;
         const ny = -p.dx / len;
@@ -118,7 +120,7 @@ export function FallingTags() {
     const ro = new ResizeObserver(layout);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [compact]);
+  }, [compact, shape]);
 
   // Drop once when the surface scrolls into view.
   useEffect(() => {
@@ -130,7 +132,8 @@ export function FallingTags() {
         .map((tag, i) => ({ tag, i }))
         .filter(({ tag }) => !compact || tag.compact)
         .sort((a, b) => (a.tag.level ?? 0) - (b.tag.level ?? 0));
-      const fall = Math.min(window.innerHeight * 0.8, 720);
+      // Bowl: drop through the open space above the floor, not across the copy.
+      const fall = shape === "bowl" ? 220 : Math.min(window.innerHeight * 0.8, 720);
 
       ScrollTrigger.create({
         trigger: wrap.current,
@@ -154,15 +157,18 @@ export function FallingTags() {
       });
     });
     return () => mm.revert();
-  }, [ready, compact]);
+  }, [ready, compact, shape]);
 
   return (
     <div
       ref={wrap}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 bottom-[calc(100%-1px)] overflow-x-clip h-[44px] sm:h-[80px] lg:h-[120px]"
+      className={clsx(
+        "pointer-events-none absolute inset-x-0 h-[44px] overflow-x-clip sm:h-[80px] lg:h-[120px]",
+        shape === "dome" ? "bottom-[calc(100%-1px)]" : "top-[calc(100%-1px)]",
+      )}
     >
-      <CurveDivider shape="dome" className="bottom-0" />
+      <CurveDivider shape={shape} className="inset-y-0" />
       {tags.map((tag, i) => (
         <div
           key={tag.label}

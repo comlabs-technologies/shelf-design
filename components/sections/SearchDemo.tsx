@@ -75,9 +75,9 @@ export function SearchDemo() {
     <section
       id="search"
       aria-labelledby="search-title"
-      className="relative z-10 bg-sand pb-24 pt-14 sm:pb-32 sm:pt-20 lg:pb-40"
+      className="relative z-10 bg-sand pb-32 pt-14 sm:pb-44 sm:pt-20 lg:pb-56"
     >
-      <FallingTags />
+      <CurveDivider shape="dome" className="bottom-[calc(100%-1px)]" />
 
       <div data-reveal className="mx-auto max-w-[1200px] px-5 pb-16 sm:px-8 sm:pb-24">
         <CredibilityStrip />
@@ -167,7 +167,8 @@ export function SearchDemo() {
         </div>
       </div>
 
-      <CurveDivider shape="bowl" className="top-[calc(100%-1px)]" />
+      {/* Everything you saved lands here: tags drop onto the curved floor. */}
+      <FallingTags shape="bowl" />
     </section>
   );
 }
