@@ -3,8 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { Eyebrow, SectionTitle } from "../ui/Eyebrow";
 import { type SourceKind } from "../ui/SourceChip";
 
-// Placeholder images, one per persona, in order.
-const images = ["/capture/step-1.png", "/capture/step-2.png", "/capture/step-3.png", "/hero-statue.webp"];
+// One image per persona, in order.
+const images = ["/personas/1.webp", "/personas/2.webp", "/personas/3.webp", "/personas/4.webp"];
 
 type Persona = {
   role: string;
@@ -72,13 +72,12 @@ export function Audience() {
               key={p.role}
               className="group relative min-h-[460px] w-[80%] shrink-0 snap-start overflow-hidden rounded-[20px] shadow-[0_1px_0_rgba(25,25,24,.04),0_20px_44px_-28px_rgba(25,25,24,.35)] sm:w-[46%] lg:w-[31%] xl:aspect-[3/4] xl:min-h-0 xl:w-auto"
             >
-              {/* PLACEHOLDER imagery — swap for one image per role. */}
-              <Image
+                            <Image
                 src={images[i]}
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 25vw, 80vw"
-                className="object-cover transition-transform duration-700 ease-recall group-hover:scale-[1.04]"
+                className="object-cover object-[70%_center] transition-transform duration-700 ease-recall group-hover:scale-[1.04]"
               />
               {/* Butter-paper overlay: a light white frost, translucent, inset from the edge. */}
               <div className="absolute inset-3 flex flex-col justify-between rounded-[14px] border border-white/45 bg-white/[0.34] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.55)] backdrop-blur-md backdrop-saturate-[1.1] lg:p-6">
