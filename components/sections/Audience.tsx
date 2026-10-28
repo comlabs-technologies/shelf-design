@@ -79,8 +79,9 @@ export function Audience() {
                 sizes="(min-width: 1024px) 25vw, 80vw"
                 className="object-cover object-[70%_center] transition-transform duration-700 ease-recall group-hover:scale-[1.04]"
               />
-              {/* Butter-paper overlay: a light white frost, translucent, inset from the edge. */}
-              <div className="absolute inset-3 flex flex-col justify-between rounded-[14px] border border-white/45 bg-white/[0.34] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.55)] backdrop-blur-md backdrop-saturate-[1.1] lg:p-6">
+              {/* Clear glass panel: barely tinted, light blur with boosted colour, and a
+                  bright specular rim so it reads as a pane of glass rather than frost. */}
+              <div className="glass-panel absolute inset-3 flex flex-col justify-between rounded-[16px] p-5 lg:p-6">
                 <span className="text-[12px] font-medium tabular-nums tracking-[0.04em] text-ink/60">0{i + 1}</span>
                 <div>
                   <h3 className="flex items-center gap-1.5 whitespace-nowrap text-[22px] font-medium sm:text-[24px] leading-[1] tracking-[-0.04em] text-ink xl:text-[clamp(20px,1.6vw,28px)]">
